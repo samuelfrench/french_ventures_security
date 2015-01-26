@@ -21,4 +21,21 @@ public interface ProductService {
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	void editProduct(Product product);
+	
+	
+	//LEGACY
+	
+	
+	@Deprecated
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public String getProductLink(String imgCode, boolean thumbnail);
+	@Deprecated
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public String getProductImageContainer(String imgCode, boolean thumbnail);
+	@Deprecated
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public String getProductListing(String productCode);
+	@Deprecated
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public String getProductListingDetails(String productCode);
 }

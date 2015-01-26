@@ -1,30 +1,19 @@
 package sample.spring.chapter14.web;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import sample.spring.chapter14.dao.ProductDao;
-import sample.spring.chapter14.dao.ProductDaoImpl;
-import sample.spring.chapter14.dao.ProductImageDAO;
-import sample.spring.chapter14.dao.ProductImageDAOImpl;
 import sample.spring.chapter14.domain.Product;
-import sample.spring.chapter14.domain.ProductDetailsImpl;
-import sample.spring.chapter14.service.FixedDepositService;
 import sample.spring.chapter14.service.ProductService;
-import sample.spring.chapter14.service.ProductServiceImpl;
 
 
 @Controller
@@ -61,9 +50,8 @@ public class ProductViewController {
 	{
 		ModelAndView viewModel = new ModelAndView();
 		viewModel.setViewName("productDetails");
-		ProductImageDAO dao = new ProductImageDAOImpl();
-		Product p = dao.getProduct(productCode);
-		p.setLargeImageDiv(new ProductDetailsImpl().getProductImageContainer(productCode, false));
+		Product p = productService.getProductByProductCode(productCode);
+		p.setLargeImageDiv(productService.getProductImageContainer(productCode, false));
 		viewModel.addObject("product", p);
 		
 		return viewModel;
