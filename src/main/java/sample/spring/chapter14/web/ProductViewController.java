@@ -45,6 +45,26 @@ public class ProductViewController {
 		return viewModel;
 	}
 	
+	@RequestMapping(value = "adminConsole")
+	@ResponseBody ModelAndView getAdminConsole(WebRequest request)
+	{
+		Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) SecurityContextHolder
+				.getContext().getAuthentication().getAuthorities();
+		Iterator<GrantedAuthority> iterator = authorities.iterator();
+		ModelAndView viewModel = new ModelAndView();
+		viewModel.setViewName("adminConsole");
+		/* ProductImageDAO dao = new ProductImageDAOImpl();
+		List<Product> productListing = new ArrayList<Product>();
+		for(int x = 1; x < 13; x++) // TODO
+		{
+			productListing.add(dao.getProduct("SAMPLE_" + String.valueOf(x)));
+		}
+		*/
+		viewModel.addObject("productListing", productService.getAllProducts());
+		
+		return viewModel;
+	}
+	
 	@RequestMapping(value = "getDetails/{productCode}")
 	@ResponseBody ModelAndView detailedProductView(WebRequest request, @PathVariable String productCode)
 	{
