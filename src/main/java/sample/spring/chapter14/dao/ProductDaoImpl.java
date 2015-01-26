@@ -3,7 +3,9 @@ package sample.spring.chapter14.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -37,7 +39,6 @@ public class ProductDaoImpl implements ProductDao {
 						throws SQLException, DataAccessException {
 						while(rs.next())
 						{
-							System.out.println("PRODUCT");
 							Product p = new Product();
 							p.setProductId(rs.getInt("product_id"));
 							p.setDescription(rs.getString("description"));
@@ -56,19 +57,45 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public void saveProduct(Product product) {
-		// TODO Auto-generated method stub
-		
+		final String sql = "INSERT INTO product(`description`,`product_code`,`qty_per_unit`" +
+								",`resource_url`,`retail_price_usd`,`supply_cost_usd`,`stock_quantity`) " +
+								"VALUES (:description, :productCode, :qtyPerUnit, :resourceURL,"
+								+ " :retailPriceUSD, :supplyCostUSD, :stockQuantity)";
+		Map<String, String> namedParams = new HashMap<String, String>();
+		namedParams.put("description", product.getDescription());
+		namedParams.put("productCode", product.getProductCode());
+		namedParams.put("qtyPerUnit", product.getQtyPerUnit().toString().trim());
+		namedParams.put("resourceURL", product.getResourceURL());
+		namedParams.put("retailPriceUSD", product.getRetailPriceUSD().toString().trim());
+		namedParams.put("supplyCostUSD", product.getSupplyCostUSD().toString().trim());
+		namedParams.put("stockQuantity", product.getUnitOnHand().toString().trim());
+		SqlParameterSource sqlParams = new MapSqlParameterSource(namedParams);
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		namedParameterJdbcTemplate.update(sql, sqlParams, keyHolder);
+		product.setProductId(keyHolder.getKey().intValue());
 	}
 
 	@Override
 	public Product getProduct(Integer productId) {
-		// TODO Auto-generated method stub
+		List<Product> productList = getAllProducts();
+		for(Product p: productList)
+		{
+			if(p.getProductId().equals(productId)){
+				return p;
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public void editProduct(Product product) {
-		// TODO Auto-generated method stub
+		final String sql = "UPDATE product SET `archive` = 1 WHERE `product_code` = :productCode";
+		SqlParameterSource namedParameters = new MapSqlParameterSource(
+				"productCode", product.getProductCode());
+
+		namedParameterJdbcTemplate.update(sql, namedParameters);
+		saveProduct(product);
+		
 		
 	}
 
@@ -84,6 +111,15 @@ public class ProductDaoImpl implements ProductDao {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public void deleteProduct(Product product) {
+		final String sql = "UPDATE product SET `archive` = 1 WHERE `product_code` = :productCode";
+		SqlParameterSource namedParameters = new MapSqlParameterSource(
+				"productCode", product.getProductCode());
+
+		namedParameterJdbcTemplate.update(sql, namedParameters);		
 	}
 
 }

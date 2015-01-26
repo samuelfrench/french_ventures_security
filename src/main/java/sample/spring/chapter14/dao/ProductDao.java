@@ -11,4 +11,5 @@ public interface ProductDao {
 	Product getProduct(Integer productId); // //
 	void editProduct(Product product);
 	Product getProductByCode(String productCode);
+	void deleteProduct(Product product);
 }
