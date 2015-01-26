@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>chapter14</groupId>
-	<artifactId>ch14-bankapp-db-security</artifactId>
+	<groupId>french</groupId>
+	<artifactId>secure</artifactId>
 	<packaging>war</packaging>
 	<version>0.1.0.BUILD-SNAPSHOT</version>
-	<name>ch14-bankapp-db-security</name>
+	<name>french_ventures_secure</name>
 	<properties>
 		<spring.version>4.0.0.RELEASE</spring.version>
 		<spring.security.version>3.2.0.RELEASE</spring.security.version>
