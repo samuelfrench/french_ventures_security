@@ -28,14 +28,14 @@ public interface ProductService {
 	
 	@Deprecated
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public String getProductLink(String imgCode, boolean thumbnail);
+	String getProductLink(String imgCode, boolean thumbnail);
 	@Deprecated
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public String getProductImageContainer(String imgCode, boolean thumbnail);
+	String getProductImageContainer(String imgCode, boolean thumbnail);
 	@Deprecated
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public String getProductListing(String productCode);
+	String getProductListing(String productCode);
 	@Deprecated
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public String getProductListingDetails(String productCode);
+	String getProductListingDetails(String productCode);
 }

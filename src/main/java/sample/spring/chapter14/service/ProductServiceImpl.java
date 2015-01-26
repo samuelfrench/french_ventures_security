@@ -38,8 +38,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Product getProductByProductCode(String productCode) {
-		// TODO Auto-generated method stub
-		return null;
+		return productDao.getProductByCode(productCode);
 	}
 
 	@Override
@@ -53,6 +52,7 @@ public class ProductServiceImpl implements ProductService {
 	public final static String PRODUCT_IMAGE_ORIGINAL_PATH = "/product/original/";
 	public final static String PRODUCT_IMAGE_THUMBNAIL_PATH = "/product/thumb/";
 	@Deprecated
+	@Override
 	public String getProductLink(String imgCode, boolean thumbnail) {
 
 		Boolean foundImage = false;
@@ -95,6 +95,7 @@ public class ProductServiceImpl implements ProductService {
 	
 
 	@Deprecated
+	@Override
 	public String getProductImageContainer(String imgCode, boolean thumbnail) {
 		String imageLink = getProductLink(imgCode, thumbnail);
 		List<String> productImageClasses = new ArrayList<String>();
@@ -114,6 +115,7 @@ public class ProductServiceImpl implements ProductService {
 
 
 	@Deprecated
+	@Override
 	public String getProductListing(String productCode) {
 		String productListingHtml = null;
 		
@@ -135,6 +137,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Deprecated
+	@Override
 	public String getProductListingDetails(String productCode) {
 		String productDetails = "test - " + productCode;
 		return productDetails;
