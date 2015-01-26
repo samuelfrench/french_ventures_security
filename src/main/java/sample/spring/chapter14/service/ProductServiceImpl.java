@@ -24,6 +24,18 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.getAllProducts();
 	}
 
+
+	@Override
+	public List<Product> getProductsUser() {
+		List<Product> userList = productDao.getAllProducts();
+		for(Product p: userList)
+		{
+			p.setSupplyCostUSD(null);
+			p.setProductId(null);
+		}
+		return userList;
+	}
+	
 	@Override
 	public void saveProduct(Product product) {
 		// TODO Auto-generated method stub

@@ -2,6 +2,9 @@ package sample.spring.chapter14.web;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import sample.spring.chapter14.domain.Product;
 import sample.spring.chapter14.service.ProductService;
@@ -81,5 +87,22 @@ public class ProductViewController {
 	@ResponseBody String getAllProducts(WebRequest request)
 	{
 		return productService.getAllProducts().toString();
+	}
+	
+	@RequestMapping("customerProductTable")
+	@ResponseBody String getAjaxData(WebRequest request)
+	{
+		Map<String,String[]> requestParameters = request.getParameterMap();
+		Integer start = Integer.getInteger(requestParameters.get("start")[0]);
+		Integer length = Integer.getInteger(requestParameters.get("length")[0]);
+		
+		List<Product> userProduct = productService.getProductsUser().subList(start, start+length);
+		return new Gson().toJson(userProduct);
+	}
+	
+	@RequestMapping("productFinder")
+	@ResponseBody ModelAndView getProductFinderView(WebRequest request)
+	{
+		return new ModelAndView("productFinder");
 	}
 }

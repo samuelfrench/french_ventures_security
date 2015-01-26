@@ -22,6 +22,9 @@ public interface ProductService {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	void editProduct(Product product);
 	
+	//SET TO USER ROLE
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	List<Product> getProductsUser();
 	
 	//LEGACY
 	
