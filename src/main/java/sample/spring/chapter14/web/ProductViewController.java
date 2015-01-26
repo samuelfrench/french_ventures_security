@@ -96,8 +96,17 @@ public class ProductViewController {
 		Integer start = Integer.getInteger(requestParameters.get("start")[0]);
 		Integer length = Integer.getInteger(requestParameters.get("length")[0]);
 		
-		List<Product> userProduct = productService.getProductsUser().subList(start, start+length);
-		return new Gson().toJson(userProduct);
+		List<Product> userProduct = productService.getProductsUser();
+		
+		
+		//debug
+		for(int x = 0; x < 5; x++)
+		{
+			userProduct.addAll(userProduct);
+		}
+		//end debug
+		
+		return new Gson().toJson(userProduct.subList(start, start+length));
 	}
 	
 	@RequestMapping("productFinder")

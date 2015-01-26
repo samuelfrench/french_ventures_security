@@ -8,6 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <jsp:include page="config.jsp" />
+
+<script
+		src="<c:url value="/resources/js/pageHelpers/productFinder.js" />"
+		type="text/javascript"></script>
 <title>Advanced Product Search (Customer Facing)</title>
 </head>
 <body>
