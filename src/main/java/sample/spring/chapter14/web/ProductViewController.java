@@ -104,9 +104,10 @@ public class ProductViewController {
 		{
 			userProduct.addAll(userProduct);
 		}
+		return new Gson().toJson(userProduct);
 		//end debug
 		
-		return new Gson().toJson(userProduct.subList(start, start+length));
+		//return new Gson().toJson(userProduct.subList(start, start+length));
 	}
 	
 	@RequestMapping("productFinder")
