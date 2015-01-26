@@ -90,7 +90,7 @@ public class ProductViewController {
 	}
 	
 	@RequestMapping("customerProductTable")
-	@ResponseBody String getAjaxData(WebRequest request)
+	@ResponseBody List<Product> getAjaxData(WebRequest request)
 	{
 		Map<String,String[]> requestParameters = request.getParameterMap();
 		Integer start = Integer.getInteger(requestParameters.get("start")[0]);
@@ -102,9 +102,11 @@ public class ProductViewController {
 		//debug
 		for(int x = 0; x < 5; x++)
 		{
-			userProduct.addAll(userProduct);
+			//userProduct.addAll(userProduct);
 		}
-		return new Gson().toJson(userProduct);
+		Gson g = new Gson();
+		
+		return userProduct;
 		//end debug
 		
 		//return new Gson().toJson(userProduct.subList(start, start+length));
