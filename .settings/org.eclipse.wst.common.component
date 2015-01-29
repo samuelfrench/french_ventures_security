@@ -4,7 +4,7 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <property name="java-output-path" value="/french_ventures_secure/target/ch14-bankapp-db-security-0.1.0.BUILD-SNAPSHOT/WEB-INF/classes"/>
-        <property name="context-root" value="french_ventures_secure"/>
+        <property name="java-output-path" value="/french_ventures_secure/target/secure-0.1.0.BUILD-SNAPSHOT/WEB-INF/classes"/>
+        <property name="context-root" value="secure"/>
     </wb-module>
 </project-modules>

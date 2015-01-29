@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
 import sample.spring.chapter14.domain.Product;
 import sample.spring.chapter14.service.ProductService;
 
@@ -89,12 +86,12 @@ public class ProductViewController {
 		return productService.getAllProducts().toString();
 	}
 	
-	@RequestMapping("customerProductTable")
+	@RequestMapping(value = "customerProductTable", headers = "accept=application/json")
 	@ResponseBody List<Product> getAjaxData(WebRequest request)
 	{
-		Map<String,String[]> requestParameters = request.getParameterMap();
-		Integer start = Integer.getInteger(requestParameters.get("start")[0]);
-		Integer length = Integer.getInteger(requestParameters.get("length")[0]);
+		//Map<String,String[]> requestParameters = request.getParameterMap();
+		//Integer start = Integer.getInteger(requestParameters.get("start")[0]);
+		//Integer length = Integer.getInteger(requestParameters.get("length")[0]);
 		
 		List<Product> userProduct = productService.getProductsUser();
 		
@@ -104,7 +101,6 @@ public class ProductViewController {
 		{
 			//userProduct.addAll(userProduct);
 		}
-		Gson g = new Gson();
 		
 		return userProduct;
 		//end debug
