@@ -99,7 +99,7 @@ public class ProductViewController {
 		//debug
 		for(int x = 0; x < 5; x++)
 		{
-			//userProduct.addAll(userProduct);
+			userProduct.addAll(userProduct);
 		}
 		
 		return userProduct;
