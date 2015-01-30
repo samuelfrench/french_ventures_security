@@ -7,7 +7,7 @@ public class ProductAjaxData {
 	private Integer iTotalRecords;
 	private Integer iTotalDisplayRecords;
 	private List<Product> aaData;
-	private Integer sEcho;
+	private Integer draw;
 	
 
 	/**
@@ -61,15 +61,15 @@ public class ProductAjaxData {
 	/**
 	 * @return the sEcho
 	 */
-	public Integer getsEcho() {
-		return sEcho;
+	public Integer getsDraw() {
+		return draw;
 	}
 
 
 	/**
 	 * @param sEcho the sEcho to set
 	 */
-	public void setsEcho(Integer sEcho) {
-		this.sEcho = sEcho;
+	public void setsDraw(Integer draw) {
+		this.draw = draw;
 	}
 }

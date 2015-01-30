@@ -91,11 +91,14 @@ public class ProductViewController {
 	@RequestMapping(value = "customerProductTable", headers = "accept=application/json")
 	@ResponseBody ProductAjaxData getAjaxData(WebRequest request)
 	{
+		Integer draw = null;
 		try{
 			Integer start = Integer.parseInt(request.getParameter("start"));
-			Integer length = Integer.parseInt(request.getParameter("length"));	
+			Integer length = Integer.parseInt(request.getParameter("length"));
+			draw = Integer.parseInt(request.getParameter("sEcho"));
 		} catch (NumberFormatException e)
 		{
+			draw = 0;
 			e.addSuppressed(e);
 		}
 		
@@ -114,7 +117,7 @@ public class ProductViewController {
 		userProduct.setAaData(pList);
 		userProduct.setiTotalDisplayRecords(10);
 		userProduct.setiTotalRecords(2000);
-		userProduct.setsEcho(Integer.parseInt(request.getParameter("sEcho")));
+		userProduct.setDraw(draw);
 		return userProduct;
 		//end debug
 		
