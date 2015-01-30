@@ -12,7 +12,7 @@ $(document).ready(function(){
 		console.log(data);
 			});
 	createTable();
-	updateTable();
+	//updateTable();
 	
 	
 });
@@ -20,10 +20,10 @@ $(document).ready(function(){
 function createTable(){
 	pTable = $("#customerProductTable").dataTable({
 		"processing": true,
-		//"serverSide": true,
-		//"deferRender": true,
-		//"ajax": "/french_ventures_secure/view/product/customerProductTable",
-		data: null,
+		"serverSide": true,
+		"deferRender": true,
+		"ajax": "/french_ventures_secure/view/product/customerProductTable",
+		//data: null,
 		
 		columns: [
 		           { data: 'resourceURL' },
@@ -43,10 +43,10 @@ function updateTable(){
 	var productRequest = $.ajax({
 		"url": "/french_ventures_secure/view/product/customerProductTable",
 		"type": "GET",
-		"data": {
-			"start": 1,
-			"length": 10,
-		},
+		//"data": {
+			//"start": 1,
+			//"length": 10,
+		//},
 		"dataType": "json",
 
 	});

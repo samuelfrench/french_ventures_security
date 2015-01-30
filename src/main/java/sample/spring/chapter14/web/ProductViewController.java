@@ -1,5 +1,6 @@
 package sample.spring.chapter14.web;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import sample.spring.chapter14.domain.Product;
+import sample.spring.chapter14.domain.ProductAjaxData;
 import sample.spring.chapter14.service.ProductService;
 
 
@@ -87,21 +89,32 @@ public class ProductViewController {
 	}
 	
 	@RequestMapping(value = "customerProductTable", headers = "accept=application/json")
-	@ResponseBody List<Product> getAjaxData(WebRequest request)
+	@ResponseBody ProductAjaxData getAjaxData(WebRequest request)
 	{
-		//Map<String,String[]> requestParameters = request.getParameterMap();
-		//Integer start = Integer.getInteger(requestParameters.get("start")[0]);
-		//Integer length = Integer.getInteger(requestParameters.get("length")[0]);
-		
-		List<Product> userProduct = productService.getProductsUser();
-		
-		
-		//debug
-		for(int x = 0; x < 5; x++)
+		try{
+			Integer start = Integer.parseInt(request.getParameter("start"));
+			Integer length = Integer.parseInt(request.getParameter("length"));	
+		} catch (NumberFormatException e)
 		{
-			userProduct.addAll(userProduct);
+			e.addSuppressed(e);
 		}
 		
+		
+		ProductAjaxData userProduct = new ProductAjaxData();
+				//userProduct.setAaData(productService.getProductsUser());
+		
+		
+		List<Product> pList = productService.getProductsUser();
+		
+		//debug
+		for(int x = 0; x < 1; x++)
+		{
+			pList.addAll(productService.getProductsUser());
+		}
+		userProduct.setAaData(pList);
+		userProduct.setiTotalDisplayRecords(10);
+		userProduct.setiTotalRecords(2000);
+		userProduct.setsEcho(Integer.parseInt(request.getParameter("sEcho")));
 		return userProduct;
 		//end debug
 		
