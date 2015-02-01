@@ -69,7 +69,7 @@ public class ProductAjaxData {
 	/**
 	 * @param sEcho the sEcho to set
 	 */
-	public void setsDraw(Integer draw) {
+	public void setsEcho(Integer draw) {
 		this.draw = draw;
 	}
 }

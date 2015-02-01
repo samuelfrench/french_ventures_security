@@ -80,9 +80,9 @@ public class ProductViewController {
 	@RequestMapping(value = "customerProductTable", headers = "accept=application/json", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	@ResponseBody ProductAjaxData getAjaxData(WebRequest request)
 	{
-			Integer start = webUtility.safeInteger(request.getParameter("start"));
-			Integer length = webUtility.safeInteger(request.getParameter("length"));
-			Integer draw =  webUtility.safeInteger(request.getParameter("echo"));
+			Integer start = webUtility.safeInteger(request.getParameter("iDisplayStart"));
+			Integer length = webUtility.safeInteger(request.getParameter("iDisplayLength"));
+			Integer draw =  webUtility.safeInteger(request.getParameter("sEcho"));
 		
 		
 		
@@ -93,7 +93,7 @@ public class ProductViewController {
 		List<Product> pList = productService.getProductsUser();
 		
 		//debuggy code
-		for(int x = 0; x < 5; x++)
+		for(int x = 0; x < 5000; x++)
 		{
 			pList.addAll(productService.getProductsUser());
 		}
@@ -101,7 +101,7 @@ public class ProductViewController {
 		userProduct.setAaData(pList);
 		userProduct.setiTotalDisplayRecords(length);
 		userProduct.setiTotalRecords(pList.size());
-		userProduct.setsDraw(draw);
+		userProduct.setsEcho(draw);
 		return userProduct;
 		//end debug
 		

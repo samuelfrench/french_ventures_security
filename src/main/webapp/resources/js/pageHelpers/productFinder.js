@@ -21,10 +21,10 @@ function createTable(){
 	pTable = $("#customerProductTable").dataTable({
 		"bProcessing": true,
 		 "bServerSide": true,
-		 "bFilter": true,
+		 "bFilter": false,
          "sPaginationType": "full_numbers",
 		"bDeferRender": true,
-		 "iDisplayLength": 2,
+		 "iDisplayLength": 10,
 		 'sAjaxSource': "/french_ventures_secure/view/product/customerProductTable",
 
 		columns: [
