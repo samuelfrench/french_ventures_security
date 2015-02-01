@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -76,12 +77,12 @@ public class ProductViewController {
 		return productService.getAllProducts().toString();
 	}
 	
-	@RequestMapping(value = "customerProductTable", headers = "accept=application/json")
+	@RequestMapping(value = "customerProductTable", headers = "accept=application/json", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	@ResponseBody ProductAjaxData getAjaxData(WebRequest request)
 	{
 			Integer start = webUtility.safeInteger(request.getParameter("start"));
 			Integer length = webUtility.safeInteger(request.getParameter("length"));
-			Integer draw =  webUtility.safeInteger(request.getParameter("sEcho"));
+			Integer draw =  webUtility.safeInteger(request.getParameter("echo"));
 		
 		
 		
@@ -96,6 +97,7 @@ public class ProductViewController {
 		{
 			pList.addAll(productService.getProductsUser());
 		}
+		pList = pList.subList(start, length);
 		userProduct.setAaData(pList);
 		userProduct.setiTotalDisplayRecords(length);
 		userProduct.setiTotalRecords(pList.size());

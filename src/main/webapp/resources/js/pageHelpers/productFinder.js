@@ -19,12 +19,14 @@ $(document).ready(function(){
 
 function createTable(){
 	pTable = $("#customerProductTable").dataTable({
-		"processing": true,
-		"serverSide": true,
-		"deferRender": true,
-		"ajax": "/french_ventures_secure/view/product/customerProductTable",
-		//data: null,
-		
+		"bProcessing": true,
+		 "bServerSide": true,
+		 "bFilter": true,
+         "sPaginationType": "full_numbers",
+		"bDeferRender": true,
+		 "iDisplayLength": 2,
+		 'sAjaxSource': "/french_ventures_secure/view/product/customerProductTable",
+
 		columns: [
 		           { data: 'resourceURL' },
 		           { data: 'retailPriceUSD'},

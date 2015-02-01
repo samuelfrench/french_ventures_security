@@ -22,7 +22,7 @@ public class WebUtilityImpl implements WebUtility {
 			integer = Integer.parseInt(string);
 		} catch(NumberFormatException e) {
 			log.warn("The following was not an integer: " + string);
-			integer = null;
+			integer = 0;
 		} 
 		return integer;
 		
