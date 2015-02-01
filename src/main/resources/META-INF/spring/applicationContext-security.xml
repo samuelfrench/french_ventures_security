@@ -19,7 +19,7 @@
 		<access-denied-handler error-page="/access-denied" />
 		<intercept-url pattern="/debug/*"
 			access="hasAnyRole('ROLE_CUSTOMER', 'ROLE_ADMIN')" />
-		<form-login login-page="/login"
+		<form-login login-page="/view/login"
 			authentication-failure-handler-ref="authFailureHandler" />
 		<logout />
 		<headers>

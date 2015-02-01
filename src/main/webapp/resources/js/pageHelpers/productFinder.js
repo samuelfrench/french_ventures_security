@@ -6,11 +6,6 @@ var pTable;
 
 $(document).ready(function(){
 
-	
-	$.get("/french_ventures_secure/view/product/customerProductTable", function(data)
-			{
-		console.log(data);
-			});
 	createTable();
 	//updateTable();
 	
@@ -25,7 +20,7 @@ function createTable(){
          "sPaginationType": "full_numbers",
 		"bDeferRender": true,
 		 "iDisplayLength": 10,
-		 'sAjaxSource': "/french_ventures_secure/view/product/customerProductTable",
+		 'sAjaxSource': "/french_ventures_secure/rest/product/customerProductTable",
 
 		columns: [
 		           { data: 'resourceURL' },
