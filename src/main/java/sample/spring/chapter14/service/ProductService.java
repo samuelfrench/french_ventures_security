@@ -2,11 +2,15 @@ package sample.spring.chapter14.service;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import sample.spring.chapter14.domain.Product;
 
 public interface ProductService {
+	
+	Logger log = Logger.getLogger(ProductService.class);
+	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	List<Product> getAllProducts();
 	

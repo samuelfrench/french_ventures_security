@@ -24,6 +24,9 @@ import sample.spring.chapter14.service.ProductService;
 @Controller
 @RequestMapping(value = "/view/product/*")
 public class ProductViewController {
+	
+	
+	
 	@Autowired
 	private ProductService productService;
 	
@@ -99,7 +102,7 @@ public class ProductViewController {
 		} catch (NumberFormatException e)
 		{
 			draw = 0;
-			e.addSuppressed(e);
+			
 		}
 		
 		
@@ -117,7 +120,7 @@ public class ProductViewController {
 		userProduct.setAaData(pList);
 		userProduct.setiTotalDisplayRecords(10);
 		userProduct.setiTotalRecords(2000);
-		userProduct.setDraw(draw);
+		userProduct.setsDraw(draw);
 		return userProduct;
 		//end debug
 		
