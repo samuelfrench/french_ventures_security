@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import sample.spring.chapter14.domain.Product;
 import sample.spring.chapter14.domain.ProductAjaxData;
 import sample.spring.chapter14.service.ProductService;
+import sample.spring.chapter14.service.WebUtility;
 
 
 @Controller
@@ -30,24 +31,15 @@ public class ProductViewController {
 	@Autowired
 	private ProductService productService;
 	
-	/*
-	 * TODO - MOVE ALL METHODS THAT RETURN VIEWS TO ANOTHER SEPERATE CONTROLLER
-	 */
+	@Autowired
+	private WebUtility webUtility;
+	
+	
 	@RequestMapping(value = "getList")
 	@ResponseBody ModelAndView getProductList(WebRequest request)
 	{
-		Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) SecurityContextHolder
-				.getContext().getAuthentication().getAuthorities();
-		Iterator<GrantedAuthority> iterator = authorities.iterator();
 		ModelAndView viewModel = new ModelAndView();
 		viewModel.setViewName("productList");
-		/* ProductImageDAO dao = new ProductImageDAOImpl();
-		List<Product> productListing = new ArrayList<Product>();
-		for(int x = 1; x < 13; x++) // TODO
-		{
-			productListing.add(dao.getProduct("SAMPLE_" + String.valueOf(x)));
-		}
-		*/
 		viewModel.addObject("productListing", productService.getAllProducts());
 		
 		return viewModel;
@@ -56,18 +48,11 @@ public class ProductViewController {
 	@RequestMapping(value = "adminConsole")
 	@ResponseBody ModelAndView getAdminConsole(WebRequest request)
 	{
-		Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) SecurityContextHolder
-				.getContext().getAuthentication().getAuthorities();
-		Iterator<GrantedAuthority> iterator = authorities.iterator();
+		
 		ModelAndView viewModel = new ModelAndView();
 		viewModel.setViewName("adminConsole");
-		/* ProductImageDAO dao = new ProductImageDAOImpl();
-		List<Product> productListing = new ArrayList<Product>();
-		for(int x = 1; x < 13; x++) // TODO
-		{
-			productListing.add(dao.getProduct("SAMPLE_" + String.valueOf(x)));
-		}
-		*/
+		
+		
 		viewModel.addObject("productListing", productService.getAllProducts());
 		
 		return viewModel;
@@ -94,37 +79,30 @@ public class ProductViewController {
 	@RequestMapping(value = "customerProductTable", headers = "accept=application/json")
 	@ResponseBody ProductAjaxData getAjaxData(WebRequest request)
 	{
-		Integer draw = null;
-		try{
-			Integer start = Integer.parseInt(request.getParameter("start"));
-			Integer length = Integer.parseInt(request.getParameter("length"));
-			draw = Integer.parseInt(request.getParameter("sEcho"));
-		} catch (NumberFormatException e)
-		{
-			draw = 0;
-			
-		}
+			Integer start = webUtility.safeInteger(request.getParameter("start"));
+			Integer length = webUtility.safeInteger(request.getParameter("length"));
+			Integer draw =  webUtility.safeInteger(request.getParameter("sEcho"));
+		
+		
 		
 		
 		ProductAjaxData userProduct = new ProductAjaxData();
-				//userProduct.setAaData(productService.getProductsUser());
 		
 		
 		List<Product> pList = productService.getProductsUser();
 		
-		//debug
-		for(int x = 0; x < 1; x++)
+		//debuggy code
+		for(int x = 0; x < 5; x++)
 		{
 			pList.addAll(productService.getProductsUser());
 		}
 		userProduct.setAaData(pList);
-		userProduct.setiTotalDisplayRecords(10);
-		userProduct.setiTotalRecords(2000);
+		userProduct.setiTotalDisplayRecords(length);
+		userProduct.setiTotalRecords(pList.size());
 		userProduct.setsDraw(draw);
 		return userProduct;
 		//end debug
 		
-		//return new Gson().toJson(userProduct.subList(start, start+length));
 	}
 	
 	@RequestMapping("productFinder")

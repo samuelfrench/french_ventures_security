@@ -27,6 +27,7 @@ public interface ProductService {
 	void editProduct(Product product);
 	
 	//SET TO USER ROLE
+	//TODO
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	List<Product> getProductsUser();
 	

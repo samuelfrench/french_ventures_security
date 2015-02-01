@@ -59,6 +59,7 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 
 	}
+	
 	public final static String REQUESTED_DATA_NOT_AVAILABLE = "Data unavailable"; //change to 404
 	public final static String IMAGE_BASE_PATH = "/french_ventures_secure/resources/image";
 	public final static String PRODUCT_IMAGE_COMPRESSED_PATH = "/product/compressed/";
