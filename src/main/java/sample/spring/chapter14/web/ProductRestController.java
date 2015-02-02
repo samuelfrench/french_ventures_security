@@ -54,6 +54,10 @@ public class ProductRestController {
 		userProduct.setiTotalRecords(pList.size());
 		userProduct.setiTotalDisplayRecords(pList.size());
 		pList = pList.subList(start, length+start);
+		for(Product p: pList)
+		{
+			p.setResourceURL("<img src='/french_ventures_secure/resources/image/product/thumb/" + p.getResourceURL()+"'>");
+		}
 		userProduct.setAaData(pList);
 		
 		
