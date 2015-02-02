@@ -14,7 +14,7 @@ import sample.spring.chapter14.service.WebUtility;
 
 
 @Controller
-@RequestMapping(value = "product/*")
+@RequestMapping(value = "/view/product/*")
 public class ProductViewController {
 	
 	

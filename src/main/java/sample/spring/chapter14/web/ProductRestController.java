@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
@@ -27,14 +29,14 @@ public class ProductRestController {
 	
 	
 
-	@RequestMapping(value = "/customerProductTable", method = RequestMethod.GET)
-	public ProductAjaxData getAjaxData(WebRequest request)
+	@RequestMapping(value = "/customerProductTable", method = RequestMethod.GET, produces = "application/json")
+	public @ResponseBody ProductAjaxData getAjaxData(WebRequest request, @RequestParam("start") String rawStart, @RequestParam("length") String rawLength, @RequestParam("draw") String rawDraw)
 	{
 		//TODO 1: set response and accept type
 		//TODO 2: Move request parameters into the actual request mapping definition thing
-			Integer start = webUtility.safeInteger(request.getParameter("iDisplayStart"));
-			Integer length = webUtility.safeInteger(request.getParameter("iDisplayLength"));
-			Integer draw =  webUtility.safeInteger(request.getParameter("sEcho"));
+			Integer start = webUtility.safeInteger(rawStart);
+			Integer length = webUtility.safeInteger(rawLength);
+			Integer draw =  webUtility.safeInteger(rawDraw);
 		
 		
 		
@@ -45,14 +47,16 @@ public class ProductRestController {
 		List<Product> pList = productService.getProductsUser();
 		
 		//debuggy code
-		for(int x = 0; x < 5000; x++)
+		for(int x = 0; x < 50; x++)
 		{
 			pList.addAll(productService.getProductsUser());
 		}
-		pList = pList.subList(start, length);
-		userProduct.setAaData(pList);
-		userProduct.setiTotalDisplayRecords(length);
 		userProduct.setiTotalRecords(pList.size());
+		userProduct.setiTotalDisplayRecords(pList.size());
+		pList = pList.subList(start, length+start);
+		userProduct.setAaData(pList);
+		
+		
 		userProduct.setsEcho(draw);
 		return userProduct;
 		//end debug

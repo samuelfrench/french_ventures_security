@@ -17,9 +17,8 @@ function createTable(){
 		"bProcessing": true,
 		 "bServerSide": true,
 		 "bFilter": false,
-         "sPaginationType": "full_numbers",
+         "paging": true,
 		"bDeferRender": true,
-		 "iDisplayLength": 10,
 		 'ajax': "/french_ventures_secure/rest/product/customerProductTable",
 
 		columns: [
