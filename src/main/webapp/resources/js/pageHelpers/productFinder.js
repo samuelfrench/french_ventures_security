@@ -20,7 +20,7 @@ function createTable(){
          "sPaginationType": "full_numbers",
 		"bDeferRender": true,
 		 "iDisplayLength": 10,
-		 'sAjaxSource': "/french_ventures_secure/rest/product/customerProductTable",
+		 'ajax': "/french_ventures_secure/rest/product/customerProductTable",
 
 		columns: [
 		           { data: 'resourceURL' },

@@ -2,13 +2,13 @@
 		<a href="/french_ventures_secure/home" class="button border-fade navButton"><img
 			src="/french_ventures_secure/resources/image/home153.svg" class="homeIcon" /></a>
 			
-		<a href="/french_ventures_secure/view/product/getList" class="button border-fade navButton"><img
+		<a href="/french_ventures_secure/product/getList" class="button border-fade navButton"><img
 			src="/french_ventures_secure/resources/image/productsNavPlaceholder.png" class="homeIcon" /></a>
 			
-				<a href="/french_ventures_secure/view/product/adminConsole" class="button border-fade navButton"><img
+				<a href="/french_ventures_secure/product/adminConsole" class="button border-fade navButton"><img
 			src="/french_ventures_secure/resources/image/productsNavPlaceholder.png" class="homeIcon" /></a>
 			
-			<a href="/french_ventures_secure/view/product/productFinder" class="button border-fade navButton"><img
+			<a href="/french_ventures_secure/product/productFinder" class="button border-fade navButton"><img
 			src="/french_ventures_secure/resources/image/productsNavPlaceholder.png" class="homeIcon" /></a>
 		
 		<a href="/french_ventures_secure_secure/debug/todo" class="navButton right" id="logo">
