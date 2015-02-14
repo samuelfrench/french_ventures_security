@@ -7,52 +7,30 @@ var pTable;
 $(document).ready(function(){
 
 	createTable();
-	//updateTable();
 	
 	
 });
 
 function createTable(){
 	pTable = $("#customerProductTable").dataTable({
-		"bProcessing": true,
-		 "bServerSide": true,
-		 "bFilter": false,
+		"processing": true,
+		 "serverSide": true,
+		 "sorting": false,
          "paging": true,
-		"bDeferRender": true,
+		"deferRender": true,
 		 'ajax': "/french_ventures_secure/rest/product/customerProductTable",
+		 'width': '100%',
 
 		columns: [
-		           { data: 'resourceURL' },
-		           { data: 'retailPriceUSD'},
-		           { data: null },
-		           { data: null },
-		           { data: 'weightInGrams'},
-		           {data: "qtyPerUnit"},
-		           {data: "unitOnHand"},
+		           { data: 'resourceURL', width:'40%' },
+		           { data: 'retailPriceUSD', width: '10%'},
+		           { data: null, width:'10%' },
+		           { data: null, width:'10%' },
+		           { data: 'weightInGrams', width:'10%'},
+		           {data: "qtyPerUnit", width:'10%'},
+		           {data: "unitOnHand", width:'10%'},
 		           
 		       ]
-	});
-}
-
-
-function updateTable(){
-	var productRequest = $.ajax({
-		"url": "/french_ventures_secure/view/product/customerProductTable",
-		"type": "GET",
-		//"data": {
-			//"start": 1,
-			//"length": 10,
-		//},
-		"dataType": "json",
-
-	});
-	
-	productRequest.done(function(data){
-		pTable.fnAddData(data)
-	});
-	
-	productRequest.fail(function(jqXHR, textStatus){
-		alert("Request failed: " + textStatus);
 	});
 }
 

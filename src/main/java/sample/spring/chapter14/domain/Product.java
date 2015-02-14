@@ -10,6 +10,9 @@ public class Product {
 	private Double retailPriceUSD;
 	private Double supplyCostUSD;
 	
+	private String imageHtml;
+	
+	@Deprecated
 	private String largeImageDiv;
 	//SAFE_UNIQUE_ID CODE
 	private String productCode;
@@ -149,15 +152,35 @@ public class Product {
 	}
 
 	/**
-	 * @return the largeImageDiv
+	 * @return the imageHtml
+	 * Transient
 	 */
+	public String getImageHtml() {
+		return imageHtml;
+	}
+
+	/**
+	 * @param imageHtml the imageHtml to set
+	 * Transient
+	 */
+	public void setImageHtml(String imageHtml) {
+		this.imageHtml = imageHtml;
+	}
+
+	/**
+	 * @return the largeImageDiv
+	 * @deprecated
+	 */
+	@Deprecated
 	public String getLargeImageDiv() {
 		return largeImageDiv;
 	}
 
 	/**
 	 * @param largeImageDiv the largeImageDiv to set
+	 * @deprecated
 	 */
+	@Deprecated
 	public void setLargeImageDiv(String largeImageDiv) {
 		this.largeImageDiv = largeImageDiv;
 	}
