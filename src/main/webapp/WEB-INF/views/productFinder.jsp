@@ -16,23 +16,24 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
+	<div id="statusMessage"></div>
 	<div style="padding-top: 160px;">
 		<table id="customerProductTable">
 			<thead>
 				<tr>
-					<td>Photo</td>
-					<td>Price Per Unit</td>
-					<td>Length</td>
-					<td>Width</td>
-					<td>Unit Weight(g)</td>
-					<td>Qty Per Unit</td>
-					<td>In Stock</td>
+					<th><h2>Photo</h2></th>
+					<th><h2>Price Per Unit</h2></th>
+					<!--  TODO <th><h2>Length</h2></th>
+					<th><h2>Width</h2></th> -->
+					<th><h2>Unit Weight(g)</h2></th>
+					<th><h2>Qty Per Unit</h2></th>
+					<th><h2>In Stock</h2></th>
 				</tr>
 			</thead>
 			<tbody>
 			</tbody>
 		</table>
-		Loading...
+		
 	</div>
 
 </body>

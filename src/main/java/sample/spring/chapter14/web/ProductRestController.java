@@ -56,7 +56,7 @@ public class ProductRestController {
 		pList = pList.subList(start, length+start);
 		for(Product p: pList)
 		{
-			p.setResourceURL("<img src='/french_ventures_secure/resources/image/product/thumb/" + p.getResourceURL()+"'>");
+			p.setImageHtml("<img src='/french_ventures_secure/resources/image/product/compressed/" + p.getResourceURL()+"'>");
 		}
 		userProduct.setAaData(pList);
 		
