@@ -18,7 +18,9 @@ import com.mysql.jdbc.log.Log;
 import french_ventures.spring.domain.Product;
 import french_ventures.spring.domain.ProductAjaxData;
 import french_ventures.spring.service.ProductService;
+import french_ventures.spring.service.TableUtility;
 import french_ventures.spring.service.WebUtility;
+import french_ventures.spring.service.TableUtility.filterTypeEnum;
 
 @RestController
 @RequestMapping(value = "/rest/product")
@@ -28,6 +30,9 @@ public class ProductRestController {
 
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private TableUtility tableUtility;
 
 	@Autowired
 	private WebUtility webUtility;
@@ -100,12 +105,9 @@ public class ProductRestController {
 		userProduct.setiTotalRecords(pList.size());
 		userProduct.setiTotalDisplayRecords(pList.size());
 
-		// DEBUG TODO
-		if (orderColumn.equals(1)) {
-			pList = applyFilter(pList, descOrder);
-		}
+		pList = tableUtility.applyFilter(pList, descOrder,filterTypeEnum.CURRENCY);
 
-		pList = pList.subList(start, length + start);
+		pList = tableUtility.isolateCurrentPage(pList, start, length);
 
 		userProduct.setAaData(pList);
 
@@ -116,25 +118,5 @@ public class ProductRestController {
 	}
 	
 	
-	//MOVE TO SERVICE TODO
-	private static List<Product> applyFilter(List<Product> list, Boolean descOrder)
-	{
-		return list.parallelStream().sorted(new Comparator<Product>() {
-
-			@Override
-			public int compare(Product p1, Product p2) {
-				Integer compare = Double.valueOf(
-						p1.getCost()
-								.substring(1, p1.getCost().length() - 1))
-						.compareTo(
-								Double.valueOf(p2.getCost().substring(1,
-										p2.getCost().length() - 1)));
-				if (descOrder) {
-					return compare;
-				} else {
-					return -compare;
-				}
-			}
-		}).collect(Collectors.toList());
-	}
+	
 }
