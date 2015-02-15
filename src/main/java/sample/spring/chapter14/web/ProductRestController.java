@@ -56,7 +56,9 @@ public class ProductRestController {
 		pList = pList.subList(start, length+start);
 		for(Product p: pList)
 		{
-			p.setImageHtml("<img id='" + p.getResourceURL() + "' class = 'tableImageItem' src='/french_ventures_secure/resources/image/product/thumb/" + p.getResourceURL()+"'>");
+			p.setImageHtml("<a href='/french_ventures_secure/resources/image/product/original/" + p.getResourceURL() + "'>"
+					+ "<img id='" + p.getResourceURL() + "' class = 'tableImageItem' "+
+		"src='/french_ventures_secure/resources/image/product/thumb/" + p.getResourceURL()+"'></a>");
 			
 			//TODO - DEMO - ADD RANDOM COST FOR NOW UNTIL WE GET INVENTORY DATA
 			String costString = "$" + 

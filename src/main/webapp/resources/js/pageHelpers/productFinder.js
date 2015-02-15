@@ -1,3 +1,10 @@
+/*
+ * Page TODO:
+ * 1. Make thumbnails smaller to fit more rows on screen
+ * 2. Add a window width change handler to re-size the data table
+ * 3. General styling - maybe add jQueryUI style or ask Xiao for recommendations
+ */
+
 //GLOBALS
 var pTable;
 var statusMessage;
@@ -18,9 +25,9 @@ $(document).ready(function(){
 
 function createTable(){
 	startLoad();
-	pTable = $("#customerProductTable").dataTable({
+	pTable = $("#customerProductTable").DataTable({
 		"dom":'lprtip',
-		"lengthMenu": [[25, 50, 500], [25, 50, 500]],
+		"lengthMenu": [[200, 10, 500], [200, 10, 500]],
 		'bAutoResize': true,
 		"bProcessing": true,
 		 "bServerSide": true,
@@ -41,14 +48,16 @@ function createTable(){
 		       
 		 "initComplete": function(settings, json) {
 		    $('#customerProductTable_length > label').append(" per page");
-			 loadComplete();
 		   },
 	});
+	pTable.on( 'preXhr.dt', startLoad);
+	pTable.on('draw.dt', loadComplete);
 }
 
 function startLoad()
 {
-	statusMessage.html("<h1 style='padding-left: 100px;'>Loading...</h1>");
+	//TODO - fix this styling
+	statusMessage.html("<h1 style='padding-left: 400px; padding-top:200px;'>Loading...</h1>");
 	setTimeout(loadError, ERROR_TIMEOUT);
 }
 
