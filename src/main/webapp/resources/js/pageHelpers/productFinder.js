@@ -26,8 +26,8 @@ $(document).ready(function(){
 function createTable(){
 	startLoad();
 	pTable = $("#customerProductTable").DataTable({
-		"dom":'lprtip',
-		"lengthMenu": [[200, 10, 500], [200, 10, 500]],
+		"dom":'lpfrtip',
+		"lengthMenu": [[10, 50, 200, 500], [10, 50, 200, 500]],
 		'bAutoResize': true,
 		"bProcessing": true,
 		 "bServerSide": true,
@@ -38,6 +38,7 @@ function createTable(){
 
 		columns: [
 		           { data: 'imageHtml'},
+		           {data: "productCode"},
 		           { data: 'cost'},
 		           { data: 'weightInGrams'},
 		           {data: "qtyPerUnit"},

@@ -1,9 +1,7 @@
 package french_ventures.spring.web;
 
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
-
-import com.mysql.jdbc.log.Log;
 
 import french_ventures.spring.domain.Product;
 import french_ventures.spring.domain.ProductAjaxData;
@@ -30,7 +26,7 @@ public class ProductRestController {
 
 	@Autowired
 	private ProductService productService;
-	
+
 	@Autowired
 	private TableUtility tableUtility;
 
@@ -43,32 +39,35 @@ public class ProductRestController {
 			@RequestParam("length") String rawLength,
 			@RequestParam("draw") String rawDraw,
 			@RequestParam("order[0][column]") String rawOrderColumn,
-			@RequestParam("order[0][dir]") String rawOrderDirection) {
-		// TODO 1: set response and accept type
-		// TODO 2: Move request parameters into the actual request mapping
+			@RequestParam("order[0][dir]") String rawOrderDirection,
+			@RequestParam("search[value]") String rawSearch) {
+		
 		// definition thing
 		Integer start = webUtility.safeInteger(rawStart);
 		Integer length = webUtility.safeInteger(rawLength);
 		Integer draw = webUtility.safeInteger(rawDraw);
 
-		// column ordering
+		// column ordering/filtering
 		Integer orderColumn = webUtility.safeInteger(rawOrderColumn);
 		Boolean descOrder = webUtility.isDescending(rawOrderDirection);
+		String search = webUtility.safeString(rawSearch);
 
 		ProductAjaxData userProduct = new ProductAjaxData();
 
 		List<Product> pList = productService.getProductsUser();
 
-		// debuggy code
+		// debug/demo code
 		for (int x = 0; x < 1000; x++) {
 			pList.addAll(productService.getProductsUser());
 		}
+		//end debug/demo
 
 		StringBuffer buffer = null;
 		for (Product p : pList) {
 
 			buffer = new StringBuffer();
 
+			//create image cell
 			buffer.append("<a href='/french_ventures_secure/resources/image/product/original/");
 			buffer.append(p.getResourceURL());
 			buffer.append("'>");
@@ -81,7 +80,7 @@ public class ProductRestController {
 
 			p.setImageHtml(buffer.toString());
 
-			// TODO - DEMO - ADD RANDOM COST FOR NOW UNTIL WE GET INVENTORY DATA
+			// DEMO - ADD RANDOM COST FOR NOW UNTIL WE GET INVENTORY DATA
 
 			String costString = "$" + (Math.random() * 1000);
 			try {
@@ -98,25 +97,43 @@ public class ProductRestController {
 				p.setInStock("<p style='font-color: red;'>COMING SOON!</p>");
 			}
 
-			// p.setWeightInGrams(Math.);
 		}
 		// end debug
 
+		
 		userProduct.setiTotalRecords(pList.size());
-		userProduct.setiTotalDisplayRecords(pList.size());
 
-		pList = tableUtility.applyFilter(pList, descOrder,filterTypeEnum.CURRENCY);
+		//TODO - declare final constants for order columns - or some mapping
+		if (orderColumn.equals(1)) {
+			pList = tableUtility.applyFilter(pList, descOrder,
+					filterTypeEnum.CURRENCY);
+		}
 
+		if (search != null) {
+			pList = tableUtility.search(pList, search);
+		}
+		
+		//get current subset of elements to display
 		pList = tableUtility.isolateCurrentPage(pList, start, length);
 
-		userProduct.setAaData(pList);
-
+		//finalize response data
+		try {
+			userProduct.setiTotalRecords(pList.size());
+			userProduct.setAaData(pList);
+		} catch (NullPointerException e) { //empty table
+			userProduct.setiTotalDisplayRecords(0);
+			userProduct.setAaData(new ArrayList<Product>());
+		}
+		
+		//handle results sets smaller than page length
+		if(length < userProduct.getAaData().size()){
+			length = userProduct.getAaData().size();
+		}
+		
+		
 		userProduct.setsEcho(draw);
 		return userProduct;
-		// end debug
 
 	}
-	
-	
-	
+
 }

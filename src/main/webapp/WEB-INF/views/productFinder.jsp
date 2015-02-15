@@ -23,6 +23,7 @@
 			<thead>
 				<tr>
 					<th><h2>Photo</h2></th>
+					<th><h2>Product Code</h2></th>
 					<th><h2>Price Per Unit</h2></th>
 					<!--  TODO <th><h2>Length</h2></th>
 					<th><h2>Width</h2></th> -->

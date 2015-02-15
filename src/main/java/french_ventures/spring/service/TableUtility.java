@@ -19,4 +19,7 @@ public interface TableUtility {
 	
 	@PreAuthorize("permitAll")
 	public List<Product> isolateCurrentPage(List<Product> list, Integer start, Integer length);
+	
+	@PreAuthorize("permitAll")
+	public List<Product> search(List<Product> list, String searchString);
 }

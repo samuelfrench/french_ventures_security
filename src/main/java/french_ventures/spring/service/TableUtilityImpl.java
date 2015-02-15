@@ -4,11 +4,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Service;
+
 import french_ventures.spring.domain.Product;
 
+@Service
 public class TableUtilityImpl implements TableUtility {
 
-	// MOVE TO SERVICE TODO
 	public List<Product> applyFilter(List<Product> list, Boolean descOrder,
 			filterTypeEnum filterType) {
 		switch (filterType) {
@@ -52,5 +54,10 @@ public class TableUtilityImpl implements TableUtility {
 		} else {
 			return list.subList(start, list.size() - 1);
 		}
+	}
+
+	@Override
+	public List<Product> search(List<Product> list, String searchString) {
+		return list.parallelStream().filter(p -> p.getProductCode().toLowerCase().contains(searchString.toLowerCase())).collect(Collectors.toList());
 	}
 }
