@@ -19,10 +19,12 @@ $(document).ready(function(){
 function createTable(){
 	startLoad();
 	pTable = $("#customerProductTable").dataTable({
-		
+		"dom":'lprtip',
+		"lengthMenu": [[25, 50, 500], [25, 50, 500]],
+		'bAutoResize': true,
 		"bProcessing": true,
 		 "bServerSide": true,
-		 "bFilter": false,
+		 "bFilter": true,
          "paging": true,
 		"bDeferRender": true,
 		 'ajax': "/french_ventures_secure/rest/product/customerProductTable",
@@ -37,8 +39,9 @@ function createTable(){
 		       ],
 		       
 		 "initComplete": function(settings, json) {
-		    loadComplete();
-		   }
+		    $('#customerProductTable_length > label').append(" per page");
+			 loadComplete();
+		   },
 	});
 }
 

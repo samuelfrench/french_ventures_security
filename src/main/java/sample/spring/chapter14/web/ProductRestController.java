@@ -47,7 +47,7 @@ public class ProductRestController {
 		List<Product> pList = productService.getProductsUser();
 		
 		//debuggy code
-		for(int x = 0; x < 50; x++)
+		for(int x = 0; x < 1000; x++)
 		{
 			pList.addAll(productService.getProductsUser());
 		}

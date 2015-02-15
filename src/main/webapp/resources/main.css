@@ -102,3 +102,18 @@ div.dataTables_length {
 div.dataTables_length, div.dataTables_filter {
 	padding-top: 0.55em;
 }
+
+#customerProductTable_info{
+	font-size: 200% !important;
+	float: center;
+	padding-left: 500px;
+}
+
+#customerProductTable_length{
+	font-size: 13pt !important;
+	
+}
+
+#customerProductTable_length > label > select{
+	font-size: 13pt !important;
+}
