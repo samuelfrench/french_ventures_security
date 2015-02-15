@@ -25,13 +25,12 @@ import french_ventures.spring.service.WebUtility;
 public class ProductRestController {
 
 	static Logger log = Logger.getLogger(WebUtility.class);
-	
+
 	@Autowired
 	private ProductService productService;
 
 	@Autowired
 	private WebUtility webUtility;
-	
 
 	@RequestMapping(value = "/customerProductTable", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody ProductAjaxData getAjaxData(WebRequest request,
@@ -59,35 +58,12 @@ public class ProductRestController {
 		for (int x = 0; x < 1000; x++) {
 			pList.addAll(productService.getProductsUser());
 		}
-		// end debug
-		
-		userProduct.setiTotalRecords(pList.size());
-		userProduct.setiTotalDisplayRecords(pList.size());
-		
-		pList = pList.subList(start, length + start);
-		
-		//DEBUG TODO
-		for (Product p : pList) {
-			log.debug(p.getProductId());
-			String costString = "$" + (Math.random() * 1000);
-			p.setCost(costString.substring(0, costString.indexOf('.') + 3));
-		}
-		pList = pList.parallelStream().sorted(new Comparator<Product>() {
 
-	        @Override
-	        public int compare(Product p1, Product p2) {
-	            return Double.valueOf(p1.getCost().substring(1, p1.getCost().length()-1))
-	            		.compareTo(Double.valueOf(p2.getCost().substring(1, p2.getCost().length()-1)));
-	        }
-		}).collect(Collectors.toList());
-		
-		
-		//some debug code
 		StringBuffer buffer = null;
 		for (Product p : pList) {
-			
+
 			buffer = new StringBuffer();
-			
+
 			buffer.append("<a href='/french_ventures_secure/resources/image/product/original/");
 			buffer.append(p.getResourceURL());
 			buffer.append("'>");
@@ -97,19 +73,18 @@ public class ProductRestController {
 			buffer.append("src='/french_ventures_secure/resources/image/product/thumb/");
 			buffer.append(p.getResourceURL());
 			buffer.append("'></a>");
-			
-			
+
 			p.setImageHtml(buffer.toString());
 
 			// TODO - DEMO - ADD RANDOM COST FOR NOW UNTIL WE GET INVENTORY DATA
-			/*
+
 			String costString = "$" + (Math.random() * 1000);
 			try {
 				p.setCost(costString.substring(0, costString.indexOf('.') + 3));
 			} catch (IndexOutOfBoundsException e) {
 				p.setCost("$0.99");
 			}
-			*/
+
 			if (pList.indexOf(p) % 3 != 2) {
 				p.setUnitOnHand(200);
 				p.setInStock("<h2>YES</h2>");
@@ -119,14 +94,47 @@ public class ProductRestController {
 			}
 
 			// p.setWeightInGrams(Math.);
-			// END DEMO/DEBUG CODE
 		}
-		
+		// end debug
+
+		userProduct.setiTotalRecords(pList.size());
+		userProduct.setiTotalDisplayRecords(pList.size());
+
+		// DEBUG TODO
+		if (orderColumn.equals(1)) {
+			pList = applyFilter(pList, descOrder);
+		}
+
+		pList = pList.subList(start, length + start);
+
 		userProduct.setAaData(pList);
 
 		userProduct.setsEcho(draw);
 		return userProduct;
 		// end debug
 
+	}
+	
+	
+	//MOVE TO SERVICE TODO
+	private static List<Product> applyFilter(List<Product> list, Boolean descOrder)
+	{
+		return list.parallelStream().sorted(new Comparator<Product>() {
+
+			@Override
+			public int compare(Product p1, Product p2) {
+				Integer compare = Double.valueOf(
+						p1.getCost()
+								.substring(1, p1.getCost().length() - 1))
+						.compareTo(
+								Double.valueOf(p2.getCost().substring(1,
+										p2.getCost().length() - 1)));
+				if (descOrder) {
+					return compare;
+				} else {
+					return -compare;
+				}
+			}
+		}).collect(Collectors.toList());
 	}
 }
