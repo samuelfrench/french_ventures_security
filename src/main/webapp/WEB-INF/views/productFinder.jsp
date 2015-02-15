@@ -17,6 +17,7 @@
 <body>
 	<jsp:include page="header.jsp" />
 	<div id="statusMessage"></div>
+	<!-- TODO - add a cool search tab -->
 	<div style="padding-top: 160px;">
 		<table id="customerProductTable">
 			<thead>
