@@ -2,6 +2,7 @@ package french_ventures.spring.service;
 
 import java.util.List;
 
+@Deprecated
 public class Basic {
 	@Deprecated
 	public static String createImageContainer(String path, List<String> classNames)
@@ -37,31 +38,5 @@ public class Basic {
 		
 		
 		return buf.toString();
-	}
-
-	public static boolean evaluateBool(String booleanToEvaluate)
-	{
-		boolean getCompressed = true;
-		try {
-			if(booleanToEvaluate.trim().equals("0"))
-			{
-				getCompressed = false;
-			}
-		} catch (NullPointerException e){}
-		return getCompressed;
-	}
-	
-	public static boolean stringOK(String toEvaluate)
-	{
-		try {
-			if(toEvaluate.length() < 1)
-			{
-				return false;
-			}
-		} catch (NullPointerException e)
-		{
-			return false;
-		}
-		return true;
 	}
 }

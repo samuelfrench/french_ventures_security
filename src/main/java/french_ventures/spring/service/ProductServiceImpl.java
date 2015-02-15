@@ -60,6 +60,13 @@ public class ProductServiceImpl implements ProductService {
 
 	}
 	
+	
+	/*
+	 * 
+	 * DEPRICATED FUNCTIONALITY - SOME OF IT IS STILL BEING USED ON THE PRODUCT BROWSING PAGE
+	 * TODO - LOW PRIORITY
+	 */
+	
 	public final static String REQUESTED_DATA_NOT_AVAILABLE = "Data unavailable"; //change to 404
 	public final static String IMAGE_BASE_PATH = "/french_ventures_secure/resources/image";
 	public final static String PRODUCT_IMAGE_COMPRESSED_PATH = "/product/compressed/";
