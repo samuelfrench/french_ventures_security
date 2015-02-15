@@ -10,7 +10,9 @@ public class Product {
 	private Double retailPriceUSD;
 	private Double supplyCostUSD;
 	
+	//transient placeholders
 	private String imageHtml;
+	private String cost;
 	
 	@Deprecated
 	private String largeImageDiv;
@@ -183,5 +185,19 @@ public class Product {
 	@Deprecated
 	public void setLargeImageDiv(String largeImageDiv) {
 		this.largeImageDiv = largeImageDiv;
+	}
+
+	/**
+	 * @return the cost
+	 */
+	public String getCost() {
+		return cost;
+	}
+
+	/**
+	 * @param cost the cost to set
+	 */
+	public void setCost(String cost) {
+		this.cost = cost;
 	}
 }

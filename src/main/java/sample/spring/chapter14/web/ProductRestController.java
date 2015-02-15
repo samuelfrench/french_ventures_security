@@ -57,6 +57,13 @@ public class ProductRestController {
 		for(Product p: pList)
 		{
 			p.setImageHtml("<img src='/french_ventures_secure/resources/image/product/compressed/" + p.getResourceURL()+"'>");
+			
+			//TODO - DEMO - ADD RANDOM COST FOR NOW UNTIL WE GET INVENTORY DATA
+			String costString = "$" + 
+					Double.sum(p.getRetailPriceUSD(), Math.random()*1000);
+			costString = costString.substring(0, costString.indexOf(".")+3);
+			p.setCost(costString);
+			//END DEMO/DEBUG CODE
 		}
 		userProduct.setAaData(pList);
 		

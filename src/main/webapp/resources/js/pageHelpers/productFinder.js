@@ -31,7 +31,7 @@ function createTable(){
 
 		columns: [
 		           { data: 'imageHtml'},
-		           { data: 'retailPriceUSD'},
+		           { data: 'cost'},
 		           { data: 'weightInGrams'},
 		           {data: "qtyPerUnit"},
 		           {data: "unitOnHand"},
