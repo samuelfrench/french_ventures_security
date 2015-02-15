@@ -1,4 +1,4 @@
-package sample.spring.chapter14.domain;
+package french_ventures.spring.domain;
 
 public class Product {
 	private Integer productId;

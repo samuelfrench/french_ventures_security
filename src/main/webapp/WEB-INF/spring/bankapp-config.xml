@@ -9,7 +9,7 @@
 <mvc:resources mapping="/resources/**" location="/resources/" />
 <mvc:default-servlet-handler />
 	<mvc:annotation-driven />
-	<context:component-scan base-package="sample.spring.chapter14.web" />
+	<context:component-scan base-package="french_ventures.spring.web" />
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

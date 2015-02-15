@@ -1,4 +1,4 @@
-package sample.spring.chapter14.dao;
+package french_ventures.spring.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +17,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import sample.spring.chapter14.domain.Product;
+import french_ventures.spring.domain.Product;
 
 @Repository
 public class ProductDaoImpl implements ProductDao {

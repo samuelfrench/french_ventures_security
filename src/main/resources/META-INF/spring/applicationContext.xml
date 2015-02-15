@@ -6,7 +6,7 @@
         http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
 	<context:component-scan
-		base-package="sample.spring.chapter14.domain, sample.spring.chapter14.dao, sample.spring.chapter14.service" />
+		base-package="french_ventures.spring.domain, french_ventures.spring.dao, french_ventures.spring.service" />
 
 	<context:property-placeholder
 		location="classpath*:META-INF/spring/database.properties" />

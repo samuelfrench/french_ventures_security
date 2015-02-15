@@ -1,4 +1,4 @@
-package sample.spring.chapter14.service;
+package french_ventures.spring.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.acls.model.MutableAclService;
 import org.springframework.stereotype.Service;
 
-import sample.spring.chapter14.dao.ProductDao;
-import sample.spring.chapter14.domain.Product;
+import french_ventures.spring.dao.ProductDao;
+import french_ventures.spring.domain.Product;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -133,6 +133,7 @@ public class ProductServiceImpl implements ProductService {
 	public String getProductListing(String productCode) {
 		String productListingHtml = null;
 		
+		//BUG - dead store TODO
 		String fullContainer = getProductImageContainer(productCode, false);
 		String thumbContainer = getProductImageContainer(productCode, true);
 		

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package sample.spring.chapter14.service;
+package french_ventures.spring.service;
 
 import org.apache.log4j.Logger;
 
@@ -14,5 +14,7 @@ public interface WebUtility {
 	
 	Integer safeInteger(String string);
 	
-	Integer safeString(String string);
+	String safeString(String string);
+	
+	Boolean isDescending(String string);
 }

@@ -1,4 +1,4 @@
-package sample.spring.chapter14.service;
+package french_ventures.spring.service;
 
 import java.util.List;
 
@@ -21,22 +21,22 @@ public class Basic {
 		{
 			hasClasses = false;
 		}
-		
-		imageContainer = "<img src='" + path + "'";
+		StringBuffer buf = new StringBuffer();
+		buf.append("<img src='").append(path).append("'");
 		if(hasClasses)
 		{
-			imageContainer += " class='";
+			buf.append(" class='");
 			for(int x = 0; x < classNames.size(); x++)
 			{
-				imageContainer += classNames.get(x) + " ";
+				buf.append(classNames.get(x)).append(" ");
 			}
-			imageContainer += "' ";
+			buf.append("' ");
 		}
-		imageContainer += "/>";
+		buf.append("/>");
 		
 		
 		
-		return imageContainer;
+		return buf.toString();
 	}
 
 	public static boolean evaluateBool(String booleanToEvaluate)

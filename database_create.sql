@@ -38,7 +38,7 @@ CREATE TABLE `acl_class` (
 
 LOCK TABLES `acl_class` WRITE;
 /*!40000 ALTER TABLE `acl_class` DISABLE KEYS */;
-INSERT INTO `acl_class` VALUES (1,'sample.spring.chapter14.domain.FixedDepositDetails');
+INSERT INTO `acl_class` VALUES (1,'french_ventures.spring.domain.FixedDepositDetails');
 /*!40000 ALTER TABLE `acl_class` ENABLE KEYS */;
 UNLOCK TABLES;
 

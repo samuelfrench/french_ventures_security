@@ -1,9 +1,9 @@
 
-package sample.spring.chapter14.dao;
+package french_ventures.spring.dao;
 
 import java.util.List;
 
-import sample.spring.chapter14.domain.Product;
+import french_ventures.spring.domain.Product;
 
 public interface ProductDao {
 	List<Product> getAllProducts();

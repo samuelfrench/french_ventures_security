@@ -1,4 +1,4 @@
-package sample.spring.chapter14.web;
+package french_ventures.spring.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import sample.spring.chapter14.domain.Product;
-import sample.spring.chapter14.service.ProductService;
-import sample.spring.chapter14.service.WebUtility;
+import french_ventures.spring.domain.Product;
+import french_ventures.spring.service.ProductService;
+import french_ventures.spring.service.WebUtility;
 
 
 @Controller

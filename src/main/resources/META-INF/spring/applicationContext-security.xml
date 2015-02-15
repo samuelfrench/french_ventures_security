@@ -29,7 +29,7 @@
 	</http>
 
 	<beans:bean id="authFailureHandler"
-		class="sample.spring.chapter14.security.MyAuthFailureHandler" />
+		class="french_ventures.spring.security.MyAuthFailureHandler" />
 
 	<global-method-security pre-post-annotations="enabled">
 		<expression-handler ref="expressionHandler" />
