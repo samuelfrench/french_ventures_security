@@ -60,9 +60,9 @@ public class ProductRestController {
 			
 			//TODO - DEMO - ADD RANDOM COST FOR NOW UNTIL WE GET INVENTORY DATA
 			String costString = "$" + 
-					Double.sum(p.getRetailPriceUSD(), Math.random()*1000);
-			costString = costString.substring(0, costString.indexOf(".")+3);
-			p.setCost(costString);
+					 (Math.random()*1000);
+			p.setCost(costString.substring(0, costString.indexOf(".")+3));
+			//p.setWeightInGrams(Math.);
 			//END DEMO/DEBUG CODE
 		}
 		userProduct.setAaData(pList);
