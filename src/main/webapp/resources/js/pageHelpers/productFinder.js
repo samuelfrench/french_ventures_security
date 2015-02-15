@@ -1,8 +1,8 @@
 /*
  * Page TODO:
- * 1. Make thumbnails smaller to fit more rows on screen
- * 2. Add a window width change handler to re-size the data table
- * 3. General styling - maybe add jQueryUI style or ask Xiao for recommendations
+ * 1. Add a window width change handler to re-size the data table
+ * 2. General styling - maybe add jQueryUI style or ask Xiao for recommendations
+ * 3. add support for other column ordering buttons (only price is implemented now)
  */
 
 //GLOBALS
@@ -57,7 +57,6 @@ function createTable(){
 
 function startLoad()
 {
-	//TODO - fix this styling
 	statusMessage.html("<h1 style='padding-left: 400px; padding-top:200px;'>Loading...</h1>");
 	setTimeout(loadError, ERROR_TIMEOUT);
 }
@@ -86,27 +85,4 @@ function loadError()
 		statusMessage.html("An unknown ajax error has occurred. Please try again later.");
 		}
 }
-
-/*
-function updateTable(){
-	var productRequest = $.ajax({
-		"url": "/french_ventures_secure/view/product/customerProductTable",
-		"type": "GET",
-		//"data": {
-			//"start": 1,
-			//"length": 10,
-		//},
-		"dataType": "json",
-
-	});
-	
-	productRequest.done(function(data){
-		pTable.fnAddData(data)
-	});
-	
-	productRequest.fail(function(jqXHR, textStatus){
-		alert("Request failed: " + textStatus);
-	});
-}
-*/
 
