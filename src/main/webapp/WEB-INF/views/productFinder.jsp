@@ -28,6 +28,7 @@
 					<th><h2>Width</h2></th> -->
 					<th><h2>Unit Weight(g)</h2></th>
 					<th><h2>Qty Per Unit</h2></th>
+					<th><h2>Units In Stock</h2></th>
 					<th><h2>In Stock</h2></th>
 				</tr>
 			</thead>

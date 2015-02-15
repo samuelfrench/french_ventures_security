@@ -56,12 +56,20 @@ public class ProductRestController {
 		pList = pList.subList(start, length+start);
 		for(Product p: pList)
 		{
-			p.setImageHtml("<img src='/french_ventures_secure/resources/image/product/compressed/" + p.getResourceURL()+"'>");
+			p.setImageHtml("<img id='" + p.getResourceURL() + "' class = 'tableImageItem' src='/french_ventures_secure/resources/image/product/thumb/" + p.getResourceURL()+"'>");
 			
 			//TODO - DEMO - ADD RANDOM COST FOR NOW UNTIL WE GET INVENTORY DATA
 			String costString = "$" + 
 					 (Math.random()*1000);
 			p.setCost(costString.substring(0, costString.indexOf(".")+3));
+			if(pList.indexOf(p)%3!=2){
+				p.setUnitOnHand(200);
+				p.setInStock("<h2>YES</h2>");	
+			} else {
+				p.setUnitOnHand(0);
+				p.setInStock("<p style='font-color: red;'>COMING SOON!</p>");
+			}
+			
 			//p.setWeightInGrams(Math.);
 			//END DEMO/DEBUG CODE
 		}

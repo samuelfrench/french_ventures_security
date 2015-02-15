@@ -35,6 +35,7 @@ function createTable(){
 		           { data: 'weightInGrams'},
 		           {data: "qtyPerUnit"},
 		           {data: "unitOnHand"},
+		           {data: "inStock"},
 		           
 		       ],
 		       
@@ -55,7 +56,18 @@ function loadComplete()
 {
 	statusMessage.html("");
     loadSuccess = true;
+    $('.tableImageItem').unbind('hover');
+    $('.tableImageItem').hover(function(){
+    	$(this).animate({width: 640, height:460}, 50);
+		$(this).attr('src', '/french_ventures_secure/resources/image/product/compressed/' + $(this).attr('id'));
+	},
+	function(){
+		$(this).animate({width: 240, height:180}, 100);
+		$(this).attr('src', '/french_ventures_secure/resources/image/product/thumb/' + $(this).attr('id'));
+	});
 }
+
+
 
 function loadError()
 {

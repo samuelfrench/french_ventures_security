@@ -13,6 +13,7 @@ public class Product {
 	//transient placeholders
 	private String imageHtml;
 	private String cost;
+	private String inStock;
 	
 	@Deprecated
 	private String largeImageDiv;
@@ -199,5 +200,19 @@ public class Product {
 	 */
 	public void setCost(String cost) {
 		this.cost = cost;
+	}
+
+	/**
+	 * @return the inStock
+	 */
+	public String getInStock() {
+		return inStock;
+	}
+
+	/**
+	 * @param inStock the inStock to set
+	 */
+	public void setInStock(String inStock) {
+		this.inStock = inStock;
 	}
 }

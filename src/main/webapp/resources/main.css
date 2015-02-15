@@ -9,6 +9,12 @@ html, body {
 	
 }
 
+td {
+    text-align:center; 
+    vertical-align:middle;
+    font-size: 18pt;
+}
+
 .content {
 	length: 2000px;
 	background-color: #F48C95;
@@ -78,6 +84,10 @@ html, body {
 #productsSmall {
 	width: 280px;
 	display: inline-block;
+}
+
+.tableImageItem{
+	float: left !important;
 }
 
 #selectedProduct {
