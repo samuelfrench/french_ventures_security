@@ -1,7 +1,10 @@
 package french_ventures.spring.web;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
+
+import com.mysql.jdbc.log.Log;
 
 import french_ventures.spring.domain.Product;
 import french_ventures.spring.domain.ProductAjaxData;
@@ -19,11 +24,14 @@ import french_ventures.spring.service.WebUtility;
 @RequestMapping(value = "/rest/product")
 public class ProductRestController {
 
+	static Logger log = Logger.getLogger(WebUtility.class);
+	
 	@Autowired
 	private ProductService productService;
 
 	@Autowired
 	private WebUtility webUtility;
+	
 
 	@RequestMapping(value = "/customerProductTable", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody ProductAjaxData getAjaxData(WebRequest request,
@@ -51,26 +59,57 @@ public class ProductRestController {
 		for (int x = 0; x < 1000; x++) {
 			pList.addAll(productService.getProductsUser());
 		}
+		// end debug
+		
 		userProduct.setiTotalRecords(pList.size());
 		userProduct.setiTotalDisplayRecords(pList.size());
+		
 		pList = pList.subList(start, length + start);
+		
+		//DEBUG TODO
 		for (Product p : pList) {
-			p.setImageHtml("<a href='/french_ventures_secure/resources/image/product/original/"
-					+ p.getResourceURL()
-					+ "'>"
-					+ "<img id='"
-					+ p.getResourceURL()
-					+ "' class = 'tableImageItem' "
-					+ "src='/french_ventures_secure/resources/image/product/thumb/"
-					+ p.getResourceURL() + "'></a>");
+			log.debug(p.getProductId());
+			String costString = "$" + (Math.random() * 1000);
+			p.setCost(costString.substring(0, costString.indexOf('.') + 3));
+		}
+		pList = pList.parallelStream().sorted(new Comparator<Product>() {
+
+	        @Override
+	        public int compare(Product p1, Product p2) {
+	            return Double.valueOf(p1.getCost().substring(1, p1.getCost().length()-1))
+	            		.compareTo(Double.valueOf(p2.getCost().substring(1, p2.getCost().length()-1)));
+	        }
+		}).collect(Collectors.toList());
+		
+		
+		//some debug code
+		StringBuffer buffer = null;
+		for (Product p : pList) {
+			
+			buffer = new StringBuffer();
+			
+			buffer.append("<a href='/french_ventures_secure/resources/image/product/original/");
+			buffer.append(p.getResourceURL());
+			buffer.append("'>");
+			buffer.append("<img id='");
+			buffer.append(p.getResourceURL());
+			buffer.append("' class = 'tableImageItem' ");
+			buffer.append("src='/french_ventures_secure/resources/image/product/thumb/");
+			buffer.append(p.getResourceURL());
+			buffer.append("'></a>");
+			
+			
+			p.setImageHtml(buffer.toString());
 
 			// TODO - DEMO - ADD RANDOM COST FOR NOW UNTIL WE GET INVENTORY DATA
+			/*
 			String costString = "$" + (Math.random() * 1000);
 			try {
 				p.setCost(costString.substring(0, costString.indexOf('.') + 3));
 			} catch (IndexOutOfBoundsException e) {
 				p.setCost("$0.99");
 			}
+			*/
 			if (pList.indexOf(p) % 3 != 2) {
 				p.setUnitOnHand(200);
 				p.setInStock("<h2>YES</h2>");
@@ -82,6 +121,7 @@ public class ProductRestController {
 			// p.setWeightInGrams(Math.);
 			// END DEMO/DEBUG CODE
 		}
+		
 		userProduct.setAaData(pList);
 
 		userProduct.setsEcho(draw);
