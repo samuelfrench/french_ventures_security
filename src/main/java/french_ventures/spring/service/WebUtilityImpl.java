@@ -63,4 +63,16 @@ public class WebUtilityImpl implements WebUtility {
 		}
 	}
 
+	@Override
+	public Double safeDouble(String string) {
+		Double d = null;
+		try{
+			d = Double.valueOf(string);
+		} catch (Exception e)
+		{
+			d = Double.valueOf("0");
+		}
+		return d;
+	}
+
 }

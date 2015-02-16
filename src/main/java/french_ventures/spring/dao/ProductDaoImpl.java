@@ -71,10 +71,10 @@ public class ProductDaoImpl implements ProductDao {
 		namedParams.put("description", product.getDescription());
 		namedParams.put("productCode", product.getProductCode());
 		namedParams.put("qtyPerUnit", product.getQtyPerUnit().toString().trim().toUpperCase());
-		namedParams.put("resourceURL", product.getResourceURL());
-		namedParams.put("retailPriceUSD", product.getRetailPriceUSD().toString().trim());
-		namedParams.put("supplyCostUSD", product.getSupplyCostUSD().toString().trim());
-		namedParams.put("stockQuantity", product.getUnitOnHand().toString().trim());
+		namedParams.put("resourceURL", "TODO");
+		namedParams.put("retailPriceUSD", "0.0");
+		namedParams.put("supplyCostUSD", "0.0");
+		namedParams.put("stockQuantity", "0");
 		namedParams.put("length", product.getLength().toString().trim());
 		namedParams.put("width", product.getWidth().toString().trim());
 		namedParams.put("thickness", product.getThickness().toString().trim());

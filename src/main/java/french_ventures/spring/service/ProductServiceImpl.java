@@ -39,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public void saveProduct(Product product) {
-		// TODO Auto-generated method stub
+		productDao.saveProduct(product);
 
 	}
 

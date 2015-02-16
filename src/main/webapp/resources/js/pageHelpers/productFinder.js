@@ -132,7 +132,11 @@ function addProduct()
 	if(inputError){
 		$('#formErrors').html("<h2>Please populate all required fields.</h2>")
 	} else {
-		alert("NOTICE: FUNCTIONALITY NOT IMPLEMENTED");
+		var data = addDialog.find( "form" ).serializeArray();
+		console.log(data);
+		$.post('/french_ventures_secure/rest/product/insert',data,function(res){
+			alert(res.success);
+		});
 	}
 }
 

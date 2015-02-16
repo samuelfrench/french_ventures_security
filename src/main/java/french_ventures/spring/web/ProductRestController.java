@@ -2,6 +2,7 @@ package french_ventures.spring.web;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import french_ventures.spring.domain.Product;
 import french_ventures.spring.domain.ProductAjaxData;
+import french_ventures.spring.domain.Response;
 import french_ventures.spring.service.ProductService;
 import french_ventures.spring.service.TableUtility;
 import french_ventures.spring.service.WebUtility;
@@ -33,6 +35,27 @@ public class ProductRestController {
 	@Autowired
 	private WebUtility webUtility;
 
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	public @ResponseBody Response insertProduct(WebRequest request)
+	{
+		Response response = new Response(false);
+		Product product = new Product();
+		product.setProductCode(request.getParameter("productCode"));
+		product.setWeightInGrams(webUtility.safeDouble(request.getParameter("weightInGrams")));
+		product.setLength(webUtility.safeDouble(request.getParameter("length")));
+		product.setWidth(webUtility.safeDouble(request.getParameter("width")));
+		product.setThickness(webUtility.safeDouble(request.getParameter("thickness")));
+		product.setQtyPerUnit(webUtility.safeInteger(request.getParameter("qtyPerUnit")));
+		product.setDescription(request.getParameter("description"));
+		productService.saveProduct(product);
+		response.setSuccess(true);
+		response.setMessage("Product added successfully!");
+		
+		
+		return response;
+	}
+	
+	
 	@RequestMapping(value = "/customerProductTable", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody ProductAjaxData getAjaxData(WebRequest request,
 			@RequestParam("start") String rawStart,

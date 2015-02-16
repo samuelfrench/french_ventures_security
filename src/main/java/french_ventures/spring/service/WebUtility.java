@@ -21,4 +21,7 @@ public interface WebUtility {
 	
 	@PreAuthorize("permitAll")
 	Boolean isDescending(String string);
+	
+	@PreAuthorize("permitAll")
+	Double safeDouble(String string);
 }
