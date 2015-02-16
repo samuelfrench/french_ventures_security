@@ -44,6 +44,7 @@
 		
 	</div>
 <div id='addProductModal' class='bigModal'>
+<span id='formStatusMessage'></span>
 <span id='formErrors'></span>
 <form>
     <fieldset>
@@ -53,6 +54,8 @@
 
       <label class='formLabel'for="weightInGrams">Weight/1000 (grams)</label>
       <input type="text" name="weightInGrams" id="weightInGrams" value="" class="text ui-widget-content ui-corner-all">
+    <label class='formLabel'for="retailPriceUSD">Retail Price (USD) $</label>
+      <input type="text" name="retailPriceUSD" id="retailPriceUSD" value="" class="text ui-widget-content ui-corner-all">
      <label class='formLabel'for="length">Length (cm)</label>
       <input type="text" name="length" id="length" value="" class="text ui-widget-content ui-corner-all">
      <label class='formLabel'for="width">Width (cm)</label>

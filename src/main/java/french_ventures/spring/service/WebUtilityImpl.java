@@ -66,6 +66,10 @@ public class WebUtilityImpl implements WebUtility {
 	@Override
 	public Double safeDouble(String string) {
 		Double d = null;
+		if(string.indexOf("$") != -1)
+		{
+			string = string.substring(string.indexOf("$"));
+		}
 		try{
 			d = Double.valueOf(string);
 		} catch (Exception e)

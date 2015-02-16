@@ -46,7 +46,8 @@ public class ProductRestController {
 		product.setWidth(webUtility.safeDouble(request.getParameter("width")));
 		product.setThickness(webUtility.safeDouble(request.getParameter("thickness")));
 		product.setQtyPerUnit(webUtility.safeInteger(request.getParameter("qtyPerUnit")));
-		product.setDescription(request.getParameter("description"));
+		product.setDescription(webUtility.safeString(request.getParameter("description")));
+		product.setRetailPriceUSD(webUtility.safeDouble(request.getParameter("retailPriceUSD")));
 		productService.saveProduct(product);
 		response.setSuccess(true);
 		response.setMessage("Product added successfully!");

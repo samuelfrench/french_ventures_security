@@ -10,6 +10,7 @@ var pTable;
 var addDialog;
 var statusMessage;
 var loadSuccess;
+var addSuccess;
 var ERROR_TIMEOUT = 15000; //1000ms = 1s
 //END GLOBAL
 
@@ -109,6 +110,7 @@ function createAddDialog()
 	      form[ 0 ].reset();
 	     addDialog.find('.ui-state-error').removeClass( "ui-state-error" );
 	     $('#formErrors').html('');
+	     $('formStatusMessage').html('');
 	    }
 	  });
 	
@@ -134,8 +136,21 @@ function addProduct()
 	} else {
 		var data = addDialog.find( "form" ).serializeArray();
 		console.log(data);
+		var addSuccess = false;
+		
+		/*
+		 * TODO - need to test this 
+		 */
+		setTimeout(function(){if(!addSuccess){alert("An unknown error has occurred. Try again later.")}},ERROR_TIMEOUT);
+		
 		$.post('/french_ventures_secure/rest/product/insert',data,function(res){
-			alert(res.success);
+			addSuccess = true;
+			if(!res.success)
+			{
+				$('#formStatusMessage').html(res.message);	
+			} else {
+				//TODO - add success dialog and ask the user if they want to add another
+			}
 		});
 	}
 }
