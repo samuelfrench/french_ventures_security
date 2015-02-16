@@ -20,7 +20,7 @@
 	<!-- TODO - add a cool search tab -->
 	
 	<security:authorize access="hasRole('ROLE_ADMIN')">
-	<div id="addButton" style='padding-top: 20px; align:right; float:right; display:block; '><input type="button" id='adminAddButton' value='Add Product (Administrator Only)'></div>
+	<div id="addButton" style='padding-top: 20px; float:left; display:block; '><input type="button" id='adminAddButton' value='Add Product (Administrator Only)'></div>
 	</security:authorize>
 
 	<div style="padding-top: 160px;">
@@ -44,15 +44,26 @@
 		
 	</div>
 <div id='addProductModal' class='bigModal'>
+<span id='formErrors'></span>
 <form>
     <fieldset>
-      <label for="productCode">Product Code</label>
-      <input type="text" name="productCode" id="productCode" value="SAMPLE_123" class="text ui-widget-content ui-corner-all">
-      <label for="weightInGrams">Weight (grams)</label>
+    
+      <label class='formLabel' for="productCode">Product Code (Must be Unique)</label>
+      <input type="text" name="productCode" id="productCode" value="" class="text ui-widget-content ui-corner-all required">
+
+      <label class='formLabel'for="weightInGrams">Weight/1000 (grams)</label>
       <input type="text" name="weightInGrams" id="weightInGrams" value="" class="text ui-widget-content ui-corner-all">
-      <label for="description">Description</label>
+     <label class='formLabel'for="length">Length (cm)</label>
+      <input type="text" name="length" id="length" value="" class="text ui-widget-content ui-corner-all">
+     <label class='formLabel'for="width">Width (cm)</label>
+      <input type="text" name="width" id="width" value="" class="text ui-widget-content ui-corner-all">
+       <label class='formLabel'for="thickness">Thickness (mm)</label>
+      <input type="text" name="thickness" id="thickness" value="2" class="text ui-widget-content ui-corner-all">
+       <label class='formLabel'for="qtyPerUnit">Quantity per Unit</label>
+      <input type="text" name="qtyPerUnit" id="qtyPerUnit" value="200" class="text ui-widget-content ui-corner-all">
+      <label class='formLabel' for="description">Description</label><br>
       <textarea name="description" id="description" class="text ui-widget-content ui-corner-all"></textarea>
- 
+
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
     </fieldset>

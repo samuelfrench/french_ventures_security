@@ -17,7 +17,7 @@ var ERROR_TIMEOUT = 15000; //1000ms = 1s
 
 $(document).ready(function(){
 	loadSuccess = false;
-	adminAddButton.click(addProduct);
+	$('#adminAddButton').click(openAddDialog);
 	statusMessage = $('#statusMessage');
 	createTable();
 	createAddDialog();
@@ -102,16 +102,40 @@ function createAddDialog()
 	    buttons: {
 	      "Add Product To Database": addProduct,
 	      Cancel: function() {
-	        dialog.dialog( "close" );
+	    	  addDialog.dialog('close');
 	      }
 	    },
 	    close: function() {
 	      form[ 0 ].reset();
-	      allFields.removeClass( "ui-state-error" );
+	     addDialog.find('.ui-state-error').removeClass( "ui-state-error" );
+	     $('#formErrors').html('');
 	    }
 	  });
+	
+	form = addDialog.find( "form" ).on( "submit", function( event ) {
+	      event.preventDefault();
+	      addProduct();
+	    });
 }
 
-function addProduct(){
-	addDialog.show();
+function addProduct()
+{
+	var inputError = false;
+	$('.required').each(function(){
+		if($(this).val().length < 1)
+			{
+			inputError = true;
+			$(this).addClass('ui-state-error');
+			
+			}
+	});
+	if(inputError){
+		$('#formErrors').html("<h2>Please populate all required fields.</h2>")
+	} else {
+		alert("NOTICE: FUNCTIONALITY NOT IMPLEMENTED");
+	}
+}
+
+function openAddDialog(){
+	addDialog.dialog('open');
 }
