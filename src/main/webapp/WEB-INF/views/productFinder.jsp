@@ -20,8 +20,7 @@
 	<!-- TODO - add a cool search tab -->
 	
 	<security:authorize access="hasRole('ROLE_ADMIN')">
-	
-	<div id="addButton"><input type="button" value='Add Product (Administrator Only)'></div>
+	<div id="addButton" style='padding-top: 20px; align:right; float:right; display:block; '><input type="button" value='Add Product (Administrator Only)'></div>
 	</security:authorize>
 
 	<div style="padding-top: 160px;">
