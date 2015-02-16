@@ -9,7 +9,7 @@
 var pTable;
 var statusMessage;
 var loadSuccess;
-var ERROR_TIMEOUT = 3000; //1000ms = 1s
+var ERROR_TIMEOUT = 50; //1000ms = 1s
 //END GLOBAL
 
 
@@ -60,6 +60,7 @@ function startLoad()
 	statusMessage.html("<h1 style='padding-left: 400px; padding-top:200px;'>Loading...</h1>");
 	setTimeout(loadError, ERROR_TIMEOUT);
 }
+
 
 function loadComplete()
 {

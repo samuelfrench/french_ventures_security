@@ -112,6 +112,9 @@ public class ProductRestController {
 
 		if (search != null) {
 			pList = tableUtility.search(pList, search);
+			userProduct.setiTotalDisplayRecords(pList.size());
+		} else {
+			userProduct.setiTotalDisplayRecords(totalRecordsInTable);
 		}
 		
 		//get current subset of elements to display
@@ -120,16 +123,11 @@ public class ProductRestController {
 		//finalize response data
 		try {
 			userProduct.setiTotalRecords(totalRecordsInTable);
-			userProduct.setiTotalDisplayRecords(totalRecordsInTable);
+			
 			userProduct.setAaData(pList);
 		} catch (NullPointerException e) { //empty table
 			userProduct.setiTotalDisplayRecords(0);
 			userProduct.setAaData(new ArrayList<Product>());
-		}
-		
-		//handle results sets smaller than page length
-		if(length < userProduct.getAaData().size()){
-			length = userProduct.getAaData().size();
 		}
 		
 		

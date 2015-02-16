@@ -2670,8 +2670,11 @@
 		settings._iRecordsDisplay = parseInt(recordsFiltered, 10);
 	
 		var data = _fnAjaxDataSrc( settings, json );
-		for ( var i=0, ien=data.length ; i<ien ; i++ ) {
-			_fnAddData( settings, data[i] );
+		
+		if(data){
+			for ( var i=0, ien=data.length ; i<ien ; i++ ) {
+				_fnAddData( settings, data[i] );
+			}
 		}
 		settings.aiDisplay = settings.aiDisplayMaster.slice();
 	
