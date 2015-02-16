@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,7 +20,7 @@
 	<!-- TODO - add a cool search tab -->
 	
 	<security:authorize access="hasRole('ROLE_ADMIN')">
-	<div id="addButton" style='padding-top: 20px; align:right; float:right; display:block; '><input type="button" value='Add Product (Administrator Only)'></div>
+	<div id="addButton" style='padding-top: 20px; align:right; float:right; display:block; '><input type="button" id='adminAddButton' value='Add Product (Administrator Only)'></div>
 	</security:authorize>
 
 	<div style="padding-top: 160px;">
@@ -43,6 +43,19 @@
 		</table>
 		
 	</div>
-
+<div id='addProductModal' class='bigModal'>
+<form>
+    <fieldset>
+      <label for="productCode">Product Code</label>
+      <input type="text" name="productCode" id="productCode" value="SAMPLE_123" class="text ui-widget-content ui-corner-all">
+      <label for="weightInGrams">Weight (grams)</label>
+      <input type="text" name="weightInGrams" id="weightInGrams" value="" class="text ui-widget-content ui-corner-all">
+      <label for="description">Description</label>
+      <textarea name="description" id="description" class="text ui-widget-content ui-corner-all"></textarea>
+ 
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+    </fieldset>
+  </form></div>
 </body>
 </html>

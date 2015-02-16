@@ -7,6 +7,7 @@
 
 //GLOBALS
 var pTable;
+var addDialog;
 var statusMessage;
 var loadSuccess;
 var ERROR_TIMEOUT = 15000; //1000ms = 1s
@@ -16,12 +17,16 @@ var ERROR_TIMEOUT = 15000; //1000ms = 1s
 
 $(document).ready(function(){
 	loadSuccess = false;
+	adminAddButton.click(addProduct);
 	statusMessage = $('#statusMessage');
 	createTable();
+	createAddDialog();
 	//updateTable();
 	
 	
 });
+
+/* BEGIN MAIN DATA TABLE FUNCTIONALITY */
 
 function createTable(){
 	startLoad();
@@ -82,8 +87,31 @@ function loadComplete()
 function loadError()
 {
 	if(!loadSuccess)
-		{
+	{
 		statusMessage.html("An unknown ajax error has occurred. Please try again later.");
-		}
+	}
+}
+/* END MAIN DATA TABLE FUNCTIONALITY */
+function createAddDialog()
+{
+	addDialog = $( "#addProductModal" ).dialog({
+	    autoOpen: false,
+	    autoHeight: true,
+	    width: 700,
+	    modal: true,
+	    buttons: {
+	      "Add Product To Database": addProduct,
+	      Cancel: function() {
+	        dialog.dialog( "close" );
+	      }
+	    },
+	    close: function() {
+	      form[ 0 ].reset();
+	      allFields.removeClass( "ui-state-error" );
+	    }
+	  });
 }
 
+function addProduct(){
+	addDialog.show();
+}
