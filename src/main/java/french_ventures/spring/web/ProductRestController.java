@@ -42,6 +42,8 @@ public class ProductRestController {
 			@RequestParam("order[0][dir]") String rawOrderDirection,
 			@RequestParam("search[value]") String rawSearch) {
 		
+		Integer totalRecordsInTable;
+		
 		// definition thing
 		Integer start = webUtility.safeInteger(rawStart);
 		Integer length = webUtility.safeInteger(rawLength);
@@ -61,6 +63,8 @@ public class ProductRestController {
 			pList.addAll(productService.getProductsUser());
 		}
 		//end debug/demo
+		
+		totalRecordsInTable = pList.size();
 
 		StringBuffer buffer = null;
 		for (Product p : pList) {
@@ -99,10 +103,7 @@ public class ProductRestController {
 
 		}
 		// end debug
-
 		
-		userProduct.setiTotalRecords(pList.size());
-
 		//TODO - declare final constants for order columns - or some mapping
 		if (orderColumn.equals(1)) {
 			pList = tableUtility.applyFilter(pList, descOrder,
@@ -118,7 +119,8 @@ public class ProductRestController {
 
 		//finalize response data
 		try {
-			userProduct.setiTotalRecords(pList.size());
+			userProduct.setiTotalRecords(totalRecordsInTable);
+			userProduct.setiTotalDisplayRecords(totalRecordsInTable);
 			userProduct.setAaData(pList);
 		} catch (NullPointerException e) { //empty table
 			userProduct.setiTotalDisplayRecords(0);
