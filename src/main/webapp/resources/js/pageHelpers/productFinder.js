@@ -9,7 +9,7 @@
 var pTable;
 var statusMessage;
 var loadSuccess;
-var ERROR_TIMEOUT = 50; //1000ms = 1s
+var ERROR_TIMEOUT = 15000; //1000ms = 1s
 //END GLOBAL
 
 
