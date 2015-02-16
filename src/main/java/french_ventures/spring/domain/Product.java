@@ -9,6 +9,9 @@ public class Product {
 	private Double weightInGrams;
 	private Double retailPriceUSD;
 	private Double supplyCostUSD;
+	private Double length;
+	private Double width;
+	private Double thickness;
 	
 	//transient placeholders
 	private String imageHtml;
@@ -55,6 +58,21 @@ public class Product {
 		this.weightInGrams = weightInGrams;
 		this.retailPriceUSD = retailPriceUSD;
 		this.supplyCostUSD = supplyCostUSD;
+	}
+	
+	public Product(Integer productId, String resourceURL, String description, Integer qtyPerUnit, Integer unitOnHand, 
+			Double weightInGrams, Double retailPriceUSD, Double supplyCostUSD, Double length, Double width, Double thickness){
+		this.productId = productId;
+		this.resourceURL = resourceURL;
+		this.description = description;
+		this.qtyPerUnit = qtyPerUnit;
+		this.unitOnHand = unitOnHand;
+		this.weightInGrams = weightInGrams;
+		this.retailPriceUSD = retailPriceUSD;
+		this.supplyCostUSD = supplyCostUSD;
+		this.length = length;
+		this.width = width;
+		this.thickness = thickness;
 	}
 	
 	/**
@@ -214,5 +232,47 @@ public class Product {
 	 */
 	public void setInStock(String inStock) {
 		this.inStock = inStock;
+	}
+
+	/**
+	 * @return the thickness
+	 */
+	public Double getThickness() {
+		return thickness;
+	}
+
+	/**
+	 * @param thickness the thickness to set
+	 */
+	public void setThickness(Double thickness) {
+		this.thickness = thickness;
+	}
+
+	/**
+	 * @return the width
+	 */
+	public Double getWidth() {
+		return width;
+	}
+
+	/**
+	 * @param width the width to set
+	 */
+	public void setWidth(Double width) {
+		this.width = width;
+	}
+
+	/**
+	 * @return the length
+	 */
+	public Double getLength() {
+		return length;
+	}
+
+	/**
+	 * @param length the length to set
+	 */
+	public void setLength(Double length) {
+		this.length = length;
 	}
 }

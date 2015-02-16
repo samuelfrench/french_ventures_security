@@ -48,6 +48,9 @@ public class ProductDaoImpl implements ProductDao {
 							p.setRetailPriceUSD(rs.getDouble("retail_price_usd"));
 							p.setSupplyCostUSD(rs.getDouble("supply_cost_usd"));
 							p.setUnitOnHand(rs.getInt("stock_quantity"));
+							p.setLength(rs.getDouble("length"));
+							p.setWidth(rs.getDouble("width"));
+							p.setThickness(rs.getDouble("thickness"));
 							ps.add(p);
 						}
 						return ps;
@@ -58,17 +61,24 @@ public class ProductDaoImpl implements ProductDao {
 	@Override
 	public void saveProduct(Product product) {
 		final String sql = "INSERT INTO product(`description`,`product_code`,`qty_per_unit`" +
-								",`resource_url`,`retail_price_usd`,`supply_cost_usd`,`stock_quantity`) " +
+								",`resource_url`,`retail_price_usd`,`supply_cost_usd`,`stock_quantity`, `length`,"
+								+ "`width`,`thickness`) " +
 								"VALUES (:description, :productCode, :qtyPerUnit, :resourceURL,"
-								+ " :retailPriceUSD, :supplyCostUSD, :stockQuantity)";
+								+ " :retailPriceUSD, :supplyCostUSD, :stockQuantity, :length, :width, :thickness)";
+		
 		Map<String, String> namedParams = new HashMap<String, String>();
+		
 		namedParams.put("description", product.getDescription());
 		namedParams.put("productCode", product.getProductCode());
-		namedParams.put("qtyPerUnit", product.getQtyPerUnit().toString().trim());
+		namedParams.put("qtyPerUnit", product.getQtyPerUnit().toString().trim().toUpperCase());
 		namedParams.put("resourceURL", product.getResourceURL());
 		namedParams.put("retailPriceUSD", product.getRetailPriceUSD().toString().trim());
 		namedParams.put("supplyCostUSD", product.getSupplyCostUSD().toString().trim());
 		namedParams.put("stockQuantity", product.getUnitOnHand().toString().trim());
+		namedParams.put("length", product.getLength().toString().trim());
+		namedParams.put("width", product.getWidth().toString().trim());
+		namedParams.put("thickness", product.getThickness().toString().trim());
+		
 		SqlParameterSource sqlParams = new MapSqlParameterSource(namedParams);
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		namedParameterJdbcTemplate.update(sql, sqlParams, keyHolder);

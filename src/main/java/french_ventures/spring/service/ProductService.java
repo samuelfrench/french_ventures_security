@@ -11,16 +11,16 @@ public interface ProductService {
 	
 	Logger log = Logger.getLogger(ProductService.class);
 	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("permitAll")
 	List<Product> getAllProducts();
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	void saveProduct(Product product);
 	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("permitAll")
 	Product getProduct(int productId);
 	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("permitAll")
 	Product getProductByProductCode(String productCode);
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -28,7 +28,7 @@ public interface ProductService {
 	
 	//SET TO USER ROLE
 	//TODO
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("permitAll")
 	List<Product> getProductsUser();
 	
 	//LEGACY
