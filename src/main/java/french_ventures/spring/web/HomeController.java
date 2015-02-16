@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value = "/home")
+@RequestMapping(value = "/")
 public class HomeController {
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "home", method = RequestMethod.GET)
 	public ModelAndView getHomeView()
 	{
 		return new ModelAndView("home");
