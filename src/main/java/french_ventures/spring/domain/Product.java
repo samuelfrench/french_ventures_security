@@ -13,6 +13,9 @@ public class Product {
 	private Double width;
 	private Double thickness;
 	
+	//system
+	private Boolean archive;
+	
 	//transient placeholders
 	private String imageHtml;
 	private String cost;
@@ -61,7 +64,7 @@ public class Product {
 	}
 	
 	public Product(Integer productId, String resourceURL, String description, Integer qtyPerUnit, Integer unitOnHand, 
-			Double weightInGrams, Double retailPriceUSD, Double supplyCostUSD, Double length, Double width, Double thickness){
+			Double weightInGrams, Double retailPriceUSD, Double supplyCostUSD, Double length, Double width, Double thickness, Boolean archive){
 		this.productId = productId;
 		this.resourceURL = resourceURL;
 		this.description = description;
@@ -73,6 +76,7 @@ public class Product {
 		this.length = length;
 		this.width = width;
 		this.thickness = thickness;
+		this.archive = archive;
 	}
 	
 	/**
@@ -274,5 +278,13 @@ public class Product {
 	 */
 	public void setLength(Double length) {
 		this.length = length;
+	}
+
+	public Boolean getArchive() {
+		return archive;
+	}
+
+	public void setArchive(Boolean archive) {
+		this.archive = archive;
 	}
 }

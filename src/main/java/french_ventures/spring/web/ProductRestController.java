@@ -83,9 +83,9 @@ public class ProductRestController {
 		List<Product> pList = productService.getProductsUser();
 
 		// debug/demo code
-		for (int x = 0; x < 1000; x++) {
-			pList.addAll(productService.getProductsUser());
-		}
+		//for (int x = 0; x < 1000; x++) {
+			//pList.addAll(productService.getProductsUser());
+		//}
 		//end debug/demo
 		
 		totalRecordsInTable = pList.size();
@@ -136,20 +136,18 @@ public class ProductRestController {
 
 		if (search != null) {
 			pList = tableUtility.search(pList, search);
-			userProduct.setiTotalDisplayRecords(pList.size());
-		} else {
-			userProduct.setiTotalDisplayRecords(totalRecordsInTable);
-		}
+		} 
 		
 		//get current subset of elements to display
 		pList = tableUtility.isolateCurrentPage(pList, start, length);
 
 		//finalize response data
 		try {
-			userProduct.setiTotalRecords(totalRecordsInTable);
-			
+			userProduct.setiTotalRecords(pList.size());
+			userProduct.setiTotalDisplayRecords(pList.size());
 			userProduct.setAaData(pList);
 		} catch (NullPointerException e) { //empty table
+			userProduct.setiTotalRecords(0);
 			userProduct.setiTotalDisplayRecords(0);
 			userProduct.setAaData(new ArrayList<Product>());
 		}

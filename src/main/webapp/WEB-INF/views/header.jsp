@@ -9,7 +9,7 @@
 			ADMIN MODE
 		</security:authorize>
 		<br />
-		USERNAME: <security:authentication property="principal.username" /> 
+		
 	</div>
 <div id="navigation" class="navDiv">
 	<a href="/french_ventures_secure/home"

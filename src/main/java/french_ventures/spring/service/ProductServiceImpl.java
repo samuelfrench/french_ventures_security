@@ -2,6 +2,7 @@ package french_ventures.spring.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<Product> getProductsUser() {
-		List<Product> userList = productDao.getAllProducts();
+		List<Product> userList = productDao.getAllProducts().parallelStream().filter(p -> p.getArchive().equals(false)).collect(Collectors.toList());
 		for(Product p: userList)
 		{
 			p.setSupplyCostUSD(null);
@@ -39,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public void saveProduct(Product product) {
-		productDao.saveProduct(product);
+		productDao.editProduct(product);
 
 	}
 

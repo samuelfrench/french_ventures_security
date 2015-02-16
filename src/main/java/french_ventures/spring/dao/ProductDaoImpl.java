@@ -51,6 +51,7 @@ public class ProductDaoImpl implements ProductDao {
 							p.setLength(rs.getDouble("length"));
 							p.setWidth(rs.getDouble("width"));
 							p.setThickness(rs.getDouble("thickness"));
+							p.setArchive(rs.getBoolean("archive"));
 							ps.add(p);
 						}
 						return ps;
