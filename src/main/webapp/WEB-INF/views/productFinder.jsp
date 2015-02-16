@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -46,30 +47,30 @@
 <div id='addProductModal' class='bigModal'>
 <span id='formStatusMessage'></span>
 <span id='formErrors'></span>
-<form>
-    <fieldset>
+<form:form method="POST" enctype="multipart/form-data" commandName="addProductModel" action="/view/product/addNewProduct">
+ 
     
       <label class='formLabel' for="productCode">Product Code (Must be Unique)</label>
-      <input type="text" name="productCode" id="productCode" value="" class="text ui-widget-content ui-corner-all required">
+      <form:input type="text" path="productCode" id="productCode" value="" class="text ui-widget-content ui-corner-all required" />
 
       <label class='formLabel'for="weightInGrams">Weight/1000 (grams)</label>
-      <input type="text" name="weightInGrams" id="weightInGrams" value="" class="text ui-widget-content ui-corner-all">
+      			<form:input type="text" path="weightInGrams" id="weightInGrams" value="" class="text ui-widget-content ui-corner-all"/>
     <label class='formLabel'for="retailPriceUSD">Retail Price (USD) $</label>
-      <input type="text" name="retailPriceUSD" id="retailPriceUSD" value="" class="text ui-widget-content ui-corner-all">
+     		 <form:input type="text" path="retailPriceUSD" id="retailPriceUSD" value="" class="text ui-widget-content ui-corner-all"/>
      <label class='formLabel'for="length">Length (cm)</label>
-      <input type="text" name="length" id="length" value="" class="text ui-widget-content ui-corner-all">
+      		<form:input type="text" path="length" id="length" value="" class="text ui-widget-content ui-corner-all"/>
      <label class='formLabel'for="width">Width (cm)</label>
-      <input type="text" name="width" id="width" value="" class="text ui-widget-content ui-corner-all">
+      		<form:input type="text" path="width" id="width" value="" class="text ui-widget-content ui-corner-all"/>
        <label class='formLabel'for="thickness">Thickness (mm)</label>
-      <input type="text" name="thickness" id="thickness" value="2" class="text ui-widget-content ui-corner-all">
+      			<form:input type="text" path="thickness" id="thickness" value="2" class="text ui-widget-content ui-corner-all"/>
        <label class='formLabel'for="qtyPerUnit">Quantity per Unit</label>
-      <input type="text" name="qtyPerUnit" id="qtyPerUnit" value="200" class="text ui-widget-content ui-corner-all">
+      			<form:input type="text" path="qtyPerUnit" id="qtyPerUnit" value="200" class="text ui-widget-content ui-corner-all"/>
       <label class='formLabel' for="description">Description</label><br>
-      <textarea name="description" id="description" class="text ui-widget-content ui-corner-all"></textarea>
+      			<form:textarea path="description" id="description" class="text ui-widget-content ui-corner-all" />
 
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
-      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-    </fieldset>
-  </form></div>
+      <form:input type="submit" tabindex="1" value="Add/Update Product" />
+
+  </form:form></div>
 </body>
 </html>

@@ -1,5 +1,7 @@
 package french_ventures.spring.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Product {
 	private Integer productId;
 	private String resourceURL;
@@ -20,6 +22,7 @@ public class Product {
 	private String imageHtml;
 	private String cost;
 	private String inStock;
+	private MultipartFile image;
 	
 	@Deprecated
 	private String largeImageDiv;
@@ -286,5 +289,13 @@ public class Product {
 
 	public void setArchive(Boolean archive) {
 		this.archive = archive;
+	}
+
+	public MultipartFile getImage() {
+		return image;
+	}
+
+	public void setImage(MultipartFile image) {
+		this.image = image;
 	}
 }

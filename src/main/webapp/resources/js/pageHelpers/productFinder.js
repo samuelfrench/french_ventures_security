@@ -101,7 +101,7 @@ function createAddDialog()
 	    width: 700,
 	    modal: true,
 	    buttons: {
-	      "Add Product To Database": addProduct,
+	      
 	      Cancel: function() {
 	    	  addDialog.dialog('close');
 	      }
@@ -114,46 +114,8 @@ function createAddDialog()
 	    }
 	  });
 	
-	form = addDialog.find( "form" ).on( "submit", function( event ) {
-	      event.preventDefault();
-	      addProduct();
-	    });
 }
 
-function addProduct()
-{
-	var inputError = false;
-	$('.required').each(function(){
-		if($(this).val().length < 1)
-			{
-			inputError = true;
-			$(this).addClass('ui-state-error');
-			
-			}
-	});
-	if(inputError){
-		$('#formErrors').html("<h2>Please populate all required fields.</h2>")
-	} else {
-		var data = addDialog.find( "form" ).serializeArray();
-		console.log(data);
-		var addSuccess = false;
-		
-		/*
-		 * TODO - need to test this 
-		 */
-		setTimeout(function(){if(!addSuccess){alert("An unknown error has occurred. Try again later.")}},ERROR_TIMEOUT);
-		
-		$.post('/french_ventures_secure/rest/product/insert',data,function(res){
-			addSuccess = true;
-			if(!res.success)
-			{
-				$('#formStatusMessage').html(res.message);	
-			} else {
-				//TODO - add success dialog and ask the user if they want to add another
-			}
-		});
-	}
-}
 
 function openAddDialog(){
 	addDialog.dialog('open');
