@@ -91,8 +91,16 @@ public class ProductViewController {
 		System.out.println(product.getImage().getOriginalFilename());
 		
 		
-		String filePath = "C:\\test\\image\\" + product.getImage().getOriginalFilename();
-			try {
+		//String filePath = "C:\\dev\\apache-tomcat-8.0.18\\webapps\\french_ventures_secure\\resources\\image\\product\\upload\\" + product.getImage().getOriginalFilename();
+		
+		
+		//debug	
+		String filePath = "C:\\dev\\apache-tomcat-8.0.18\\webapps\\french_ventures_secure\\resources\\image\\product\\compressed_min\\" + product.getImage().getOriginalFilename();
+
+		
+		try {
+
+			product.setResourceURL(product.getImage().getOriginalFilename());
 				product.getImage().transferTo(new File(filePath));
 			} catch (IllegalStateException | IOException e) {
 				// TODO Auto-generated catch block

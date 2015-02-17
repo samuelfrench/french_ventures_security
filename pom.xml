@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>french</groupId>
 	<artifactId>french_ventures_secure</artifactId>
-	<packaging>pom</packaging>
+	<packaging>war</packaging>
 	<version>0.1.0.BUILD-SNAPSHOT</version>
 	<name>french_ventures_secure</name>
 	<properties>
