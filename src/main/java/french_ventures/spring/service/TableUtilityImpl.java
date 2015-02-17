@@ -1,5 +1,6 @@
 package french_ventures.spring.service;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -58,6 +59,11 @@ public class TableUtilityImpl implements TableUtility {
 
 	@Override
 	public List<Product> search(List<Product> list, String searchString) {
+		try{
 		return list.parallelStream().filter(p -> p.getProductCode().toLowerCase().contains(searchString.toLowerCase())).collect(Collectors.toList());
-	}
+		} catch (NullPointerException e)
+		{
+			return new ArrayList<Product>();
+		}
+		}
 }

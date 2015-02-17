@@ -47,7 +47,7 @@
 <div id='addProductModal' class='bigModal'>
 <span id='formStatusMessage'></span>
 <span id='formErrors'></span>
-<form:form method="POST" enctype="multipart/form-data" commandName="addProductModel" action="/french_ventures_secure/view/product/addNewProduct">
+<form:form method="POST" commandName="addProductModel" action="/french_ventures_secure/view/product/addNewProduct">
  
     
       <label class='formLabel' for="productCode">Product Code (Must be Unique)</label>

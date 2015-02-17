@@ -75,8 +75,9 @@ public class ProductViewController {
 	}
 	
 	@RequestMapping(value = "addNewProduct", method = RequestMethod.POST)
-	@ResponseBody String addNewProduct(@ModelAttribute("addProductModel") Product product)
+	@ResponseBody String addNewProduct(WebRequest request ,@ModelAttribute("addProductModel") Product product)
 	{
+		System.out.println("debug: product code: " + product.getProductCode());
 		productService.saveProduct(product);
 		return "debug";
 	}
