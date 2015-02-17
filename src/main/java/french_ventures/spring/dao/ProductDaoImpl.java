@@ -72,14 +72,14 @@ public class ProductDaoImpl implements ProductDao {
 		namedParams.put("description", product.getDescription());
 		namedParams.put("productCode", product.getProductCode());
 		//namedParams.put("qtyPerUnit", product.getQtyPerUnit().toString().trim().toUpperCase());
-		namedParams.put("qtyPerUnit", "200");
-		namedParams.put("resourceURL", "TODO");
+		namedParams.put("qtyPerUnit", product.getQtyPerUnit().toString());
+		namedParams.put("resourceURL", product.getResourceURL());
 		namedParams.put("retailPriceUSD", "0.0");
 		namedParams.put("supplyCostUSD", "0.0");
 		namedParams.put("stockQuantity", "0");
-		namedParams.put("length", "0");
-		namedParams.put("width", "0"); //TODO
-		namedParams.put("thickness", "0");
+		namedParams.put("length", product.getLength().toString());
+		namedParams.put("width",  product.getWidth().toString()); //TODO
+		namedParams.put("thickness", product.getThickness().toString());
 		
 		SqlParameterSource sqlParams = new MapSqlParameterSource(namedParams);
 		KeyHolder keyHolder = new GeneratedKeyHolder();

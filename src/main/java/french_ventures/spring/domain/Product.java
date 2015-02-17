@@ -52,6 +52,9 @@ public class Product {
 	public Product()
 	{
 		setProductId(Integer.valueOf(-1));
+		this.length = Double.valueOf("0");
+		this.width = Double.valueOf("0");
+		this.archive = false;
 	}
 	
 	public Product(Integer productId, String resourceURL, String description, Integer qtyPerUnit, Integer unitOnHand, 

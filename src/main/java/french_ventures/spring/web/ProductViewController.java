@@ -75,10 +75,14 @@ public class ProductViewController {
 	}
 	
 	@RequestMapping(value = "addNewProduct", method = RequestMethod.POST)
-	@ResponseBody String addNewProduct(WebRequest request ,@ModelAttribute("addProductModel") Product product)
+	@ResponseBody ModelAndView addNewProduct(WebRequest request ,@ModelAttribute("addProductModel") Product product)
 	{
+		System.out.println(product.getLength());
 		System.out.println("debug: product code: " + product.getProductCode());
 		productService.saveProduct(product);
-		return "debug";
+		ModelAndView viewModel = new ModelAndView("productFinder");
+		viewModel.addObject("addProductModel", new Product());
+		viewModel.addObject("status", "Added Successfully!");
+		return viewModel;
 	}
 }
