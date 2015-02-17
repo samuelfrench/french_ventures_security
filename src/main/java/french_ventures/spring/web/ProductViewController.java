@@ -1,8 +1,11 @@
 package french_ventures.spring.web;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,6 +33,9 @@ public class ProductViewController {
 	
 	@Autowired
 	private WebUtility webUtility;
+	
+	@Autowired
+	  private ApplicationContext appContext;
 	
 	
 	@RequestMapping(value = "getList")
@@ -83,6 +89,17 @@ public class ProductViewController {
 			@Validated MultipartFile image)
 	{
 		System.out.println(product.getImage().getOriginalFilename());
+		
+		
+		String filePath = "C:\\test\\image\\" + product.getImage().getOriginalFilename();
+			try {
+				product.getImage().transferTo(new File(filePath));
+			} catch (IllegalStateException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
 		System.out.println("debug: product code: " + product.getProductCode());
 		productService.saveProduct(product);
 		ModelAndView viewModel = new ModelAndView("productFinder");
