@@ -53,7 +53,7 @@ public class TableUtilityImpl implements TableUtility {
 		if (list.size() > start + length) {
 			return list.subList(start, length + start);
 		} else {
-			return list.subList(start, list.size() - 1);
+			return list.subList(start, list.size());
 		}
 	}
 
