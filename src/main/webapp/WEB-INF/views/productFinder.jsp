@@ -47,7 +47,7 @@
 <div id='addProductModal' class='bigModal'>
 <span id='formStatusMessage'></span>
 <span id='formErrors'></span>
-<form:form method="POST" commandName="addProductModel" action="/french_ventures_secure/view/product/addNewProduct">
+<form:form method="POST" commandName="addProductModel" encType="multipart/form-data" action="/french_ventures_secure/view/product/addNewProduct">
  
     
       <label class='formLabel' for="productCode">Product Code (Must be Unique)</label>
@@ -67,6 +67,7 @@
       			<form:input type="text" path="qtyPerUnit" id="qtyPerUnit" value="200" class="text ui-widget-content ui-corner-all"/>
       <label class='formLabel'  path="description">Description</label><br>
       			<form:textarea path="description" id="description" class="text ui-widget-content ui-corner-all" />
+ <input type="file" name="image" />
 
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
       <input type="submit" tabindex="1" value="Add/Update Product" />

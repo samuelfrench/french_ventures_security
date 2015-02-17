@@ -1,13 +1,17 @@
 package french_ventures.spring.web;
 
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import french_ventures.spring.domain.Product;
@@ -75,9 +79,10 @@ public class ProductViewController {
 	}
 	
 	@RequestMapping(value = "addNewProduct", method = RequestMethod.POST)
-	@ResponseBody ModelAndView addNewProduct(WebRequest request ,@ModelAttribute("addProductModel") Product product)
+	@ResponseBody ModelAndView addNewProduct(WebRequest request ,@ModelAttribute("addProductModel") Product product,
+			@Validated MultipartFile image)
 	{
-		System.out.println(product.getLength());
+		System.out.println(product.getImage().getOriginalFilename());
 		System.out.println("debug: product code: " + product.getProductCode());
 		productService.saveProduct(product);
 		ModelAndView viewModel = new ModelAndView("productFinder");
