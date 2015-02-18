@@ -3,9 +3,15 @@ package french_ventures.spring.web;
 import java.io.File;
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.context.support.ServletContextResource;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -85,7 +92,7 @@ public class ProductViewController {
 	}
 	
 	@RequestMapping(value = "addNewProduct", method = RequestMethod.POST)
-	@ResponseBody ModelAndView addNewProduct(WebRequest request ,@ModelAttribute("addProductModel") Product product,
+	@ResponseBody ModelAndView addNewProduct(@ModelAttribute("addProductModel") Product product,
 			@Validated MultipartFile image)
 	{
 		System.out.println(product.getImage().getOriginalFilename());
@@ -93,15 +100,15 @@ public class ProductViewController {
 		
 		//String filePath = "C:\\dev\\apache-tomcat-8.0.18\\webapps\\french_ventures_secure\\resources\\image\\product\\upload\\" + product.getImage().getOriginalFilename();
 		
-		
+
 		//debug	
-		String filePath = "C:\\dev\\apache-tomcat-8.0.18\\webapps\\french_ventures_secure\\resources\\image\\product\\compressed_min\\" + product.getImage().getOriginalFilename();
+	//String filePath =  + "\\resources\\image\\product\\thumb\\" + product.getImage().getOriginalFilename();
 
 		
 		try {
 
 			product.setResourceURL(product.getImage().getOriginalFilename());
-				product.getImage().transferTo(new File(filePath));
+				product.getImage().transferTo(new File("/upload/" + product.getImage().getOriginalFilename()));
 			} catch (IllegalStateException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -113,6 +120,7 @@ public class ProductViewController {
 		ModelAndView viewModel = new ModelAndView("productFinder");
 		viewModel.addObject("addProductModel", new Product());
 		viewModel.addObject("status", "Added Successfully!");
+		
 		return viewModel;
 	}
 }

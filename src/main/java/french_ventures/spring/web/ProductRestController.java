@@ -24,7 +24,7 @@ import french_ventures.spring.service.TableUtility.filterTypeEnum;
 @RequestMapping(value = "/rest/product")
 public class ProductRestController {
 
-	static Logger log = Logger.getLogger(WebUtility.class);
+	static Logger log = Logger.getLogger(ProductRestController.class);
 
 	@Autowired
 	private ProductService productService;
@@ -66,35 +66,28 @@ public class ProductRestController {
 			@RequestParam("order[0][dir]") String rawOrderDirection,
 			@RequestParam("search[value]") String rawSearch) {
 		
-		Integer totalRecordsInTable;
-		
+	
 		// definition thing
 		Integer start = webUtility.safeInteger(rawStart);
 		Integer length = webUtility.safeInteger(rawLength);
 		Integer draw = webUtility.safeInteger(rawDraw);
+		
+		log.info("Params: length: " + length + " draw " + draw + " start: " + start);
 
 		// column ordering/filtering
 		Integer orderColumn = webUtility.safeInteger(rawOrderColumn);
 		Boolean descOrder = webUtility.isDescending(rawOrderDirection);
 		String search = webUtility.safeString(rawSearch);
+		log.info("search: " + search);
 
 		ProductAjaxData userProduct = new ProductAjaxData();
 
 		List<Product> pList = productService.getProductsUser();
-
-		// debug/demo code
-		//for (int x = 0; x < 1000; x++) {
-			//pList.addAll(productService.getProductsUser());
-		//}
-		//end debug/demo
-		
-		totalRecordsInTable = pList.size();
+		log.info("list size: " + pList.size());
 
 		StringBuffer buffer = null;
 		for (Product p : pList) {
-
 			buffer = new StringBuffer();
-
 			//create image cell
 			buffer.append("<a href='/french_ventures_secure/resources/image/product/original/");
 			buffer.append(p.getResourceURL());
@@ -129,28 +122,39 @@ public class ProductRestController {
 		// end debug
 		
 		//TODO - declare final constants for order columns - or some mapping
+/*
 		if (orderColumn.equals(1)) {
+			log.info("Applying filter");
 			pList = tableUtility.applyFilter(pList, descOrder,
 					filterTypeEnum.CURRENCY);
+			log.info("Filtered results length: " + pList.size());
 		}
 
 		if (search != null) {
+			log.info("Applying search: " + search);
 			pList = tableUtility.search(pList, search);
+			log.info("Post search value: " + pList.size());
 		} 
+		*/
 		
+		
+		log.info("Before creating page size: " + pList.size());
+		Integer totalRecords = pList.size();
 		//get current subset of elements to display
+		if(length+start > pList.size()){length = pList.size();}
 		pList = tableUtility.isolateCurrentPage(pList, start, length);
 
 		//finalize response data
-		try {
-			userProduct.setiTotalRecords(pList.size());
-			userProduct.setiTotalDisplayRecords(pList.size());
+		//try {
+			userProduct.setiTotalRecords(totalRecords);
+			userProduct.setiTotalDisplayRecords(totalRecords);
 			userProduct.setAaData(pList);
-		} catch (NullPointerException e) { //empty table
+		 /*catch (NullPointerException e) { //empty table
+			e.printStackTrace();
 			userProduct.setiTotalRecords(0);
 			userProduct.setiTotalDisplayRecords(0);
 			userProduct.setAaData(new ArrayList<Product>());
-		}
+		}*/
 		
 		
 		userProduct.setsEcho(draw);
