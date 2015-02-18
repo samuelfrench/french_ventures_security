@@ -1,8 +1,18 @@
 package french_ventures.spring.web;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -161,5 +171,17 @@ public class ProductRestController {
 		return userProduct;
 
 	}
-
+	/*
+	 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	        String filename = request.getPathInfo().substring(1);
+	        File file = new File(System.getProperty("java.io.tmpdir"), filename);
+	        response.setHeader("Content-Length", String.valueOf(file.length()));
+	        response.setHeader("Content-Disposition", "inline; filename=\"" + filename + "\"");
+	        BufferedReader br = new BufferedReader(new FileReader(file));
+	        while(br.ready()){
+	        response.getOutputStream().write(br.read());
+	        }
+	        br.close();
+	    }
+*/
 }
