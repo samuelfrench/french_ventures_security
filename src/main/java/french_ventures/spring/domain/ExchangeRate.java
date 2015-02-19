@@ -51,7 +51,7 @@ public class ExchangeRate {
 			}
 			default:
 			{
-				throw new InvalidParameterException();
+				this.setBaseCurrency(Currency.USD);
 			}
 		}
 		
@@ -122,16 +122,6 @@ public class ExchangeRate {
 	
 	public void update()
 	{
-		try{
-			if(this.date == null)
-			{
-				throw new IllegalStateException();
-			}
-		} catch (NullPointerException e)
-		{
-			throw new IllegalStateException();
-		}
-		
 		this.setUpdated(new Timestamp(date.getTime()));
 	}
 }
