@@ -82,18 +82,18 @@ public class ProductRestController {
 		Integer length = webUtility.safeInteger(rawLength);
 		Integer draw = webUtility.safeInteger(rawDraw);
 		
-		log.info("Params: length: " + length + " draw " + draw + " start: " + start);
+		log.debug("Params: length: " + length + " draw " + draw + " start: " + start);
 
 		// column ordering/filtering
 		Integer orderColumn = webUtility.safeInteger(rawOrderColumn);
 		Boolean descOrder = webUtility.isDescending(rawOrderDirection);
 		String search = webUtility.safeString(rawSearch);
-		log.info("search: " + search);
+		log.debug("search: " + search);
 
 		ProductAjaxData userProduct = new ProductAjaxData();
 
 		List<Product> pList = productService.getProductsUser();
-		log.info("list size: " + pList.size());
+		log.debug("list size: " + pList.size());
 
 		StringBuffer buffer = null;
 		for (Product p : pList) {
@@ -108,18 +108,15 @@ public class ProductRestController {
 			buffer.append("src='/french_ventures_secure/resources/image/product/thumb/");
 			buffer.append(p.getResourceURL());
 			buffer.append("'></a>");
-
 			p.setImageHtml(buffer.toString());
 
 			// DEMO - ADD RANDOM COST FOR NOW UNTIL WE GET INVENTORY DATA
-
 			String costString = "$" + (Math.random() * 1000);
 			try {
 				p.setCost(costString.substring(0, costString.indexOf('.') + 3));
 			} catch (IndexOutOfBoundsException e) {
 				p.setCost("$0.99");
 			}
-
 			if (pList.indexOf(p) % 3 != 2) {
 				p.setUnitOnHand(200);
 				p.setInStock("<h2>YES</h2>");
@@ -127,61 +124,50 @@ public class ProductRestController {
 				p.setUnitOnHand(0);
 				p.setInStock("<p style='font-color: red;'>COMING SOON!</p>");
 			}
-
 		}
 		// end debug
 		
-		//TODO - declare final constants for order columns - or some mapping
-/*
-		if (orderColumn.equals(1)) {
-			log.info("Applying filter");
+		log.debug("Original list size: " + pList.size());
+		Integer totalRecords = pList.size();
+		
+		if (search != null && search.length() > 1 && !emptyList(pList)) {
+			log.debug("Applying search: " + search);
+			pList = tableUtility.search(pList, search);
+			log.debug("Post search value: " + pList.size());
+		} 
+
+		if (orderColumn.equals(1) && !emptyList(pList)) {
+			log.debug("Applying filter");
 			pList = tableUtility.applyFilter(pList, descOrder,
 					filterTypeEnum.CURRENCY);
-			log.info("Filtered results length: " + pList.size());
+			log.debug("Filtered results length: " + pList.size());
 		}
 
-		if (search != null) {
-			log.info("Applying search: " + search);
-			pList = tableUtility.search(pList, search);
-			log.info("Post search value: " + pList.size());
-		} 
-		*/
 		
 		
-		log.info("Before creating page size: " + pList.size());
-		Integer totalRecords = pList.size();
+		
+		
+		
 		//get current subset of elements to display
 		if(length+start > pList.size()){length = pList.size();}
 		pList = tableUtility.isolateCurrentPage(pList, start, length);
 
 		//finalize response data
-		//try {
-			userProduct.setiTotalRecords(totalRecords);
-			userProduct.setiTotalDisplayRecords(totalRecords);
-			userProduct.setAaData(pList);
-		 /*catch (NullPointerException e) { //empty table
-			e.printStackTrace();
-			userProduct.setiTotalRecords(0);
-			userProduct.setiTotalDisplayRecords(0);
-			userProduct.setAaData(new ArrayList<Product>());
-		}*/
-		
-		
+		userProduct.setiTotalRecords(totalRecords);
+		userProduct.setiTotalDisplayRecords(totalRecords);
+		userProduct.setAaData(pList);
 		userProduct.setsEcho(draw);
+		
 		return userProduct;
-
 	}
-	/*
-	 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	        String filename = request.getPathInfo().substring(1);
-	        File file = new File(System.getProperty("java.io.tmpdir"), filename);
-	        response.setHeader("Content-Length", String.valueOf(file.length()));
-	        response.setHeader("Content-Disposition", "inline; filename=\"" + filename + "\"");
-	        BufferedReader br = new BufferedReader(new FileReader(file));
-	        while(br.ready()){
-	        response.getOutputStream().write(br.read());
-	        }
-	        br.close();
-	    }
-*/
+	
+	private Boolean emptyList(List<Product> pList){
+		Boolean emptyResultSet;
+		try{
+			emptyResultSet = (pList.size() < 1);
+		} catch (NullPointerException e){
+			emptyResultSet = true;
+		}
+		return emptyResultSet;
+	}
 }
