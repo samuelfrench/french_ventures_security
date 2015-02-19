@@ -18,7 +18,7 @@ public class MiscRestController {
 	@Autowired
 	ExchangeRateService exchangeRateService;
 	
-	@RequestMapping(value = "/customerProductTable", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/misc/exchangeRate", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody ExchangeRate getRate()
 	{
 		return exchangeRateService.getExchangeRate(BASE_CURRENCY);
