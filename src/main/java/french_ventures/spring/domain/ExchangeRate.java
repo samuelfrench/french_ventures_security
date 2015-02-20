@@ -1,7 +1,5 @@
 package french_ventures.spring.domain;
 
-import java.security.InvalidParameterException;
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class ExchangeRate {
@@ -15,13 +13,12 @@ public class ExchangeRate {
 	private Double GBPRate;
 	private Double EURRate;
 	private Double CADRate;
-	private Timestamp updated;
-	private Date date;
+	private Long updated;
+	private String displayUpdated;
 	
 	public ExchangeRate(){}
-	public ExchangeRate(String baseCurrency)
+	public ExchangeRate(String baseCurrency, Long updated)
 	{
-		this.date = new Date();
 		switch(baseCurrency)
 		{
 			case("USD"):
@@ -54,9 +51,8 @@ public class ExchangeRate {
 				this.setBaseCurrency(Currency.USD);
 			}
 		}
-		
-		
-		update();
+		System.out.println("in class up: " + updated); //DEBUG TODO
+		this.setUpdated(updated);
 	}
 	
 	
@@ -78,7 +74,6 @@ public class ExchangeRate {
 	}
 	public void setUSDRate(Double uSDRate) {
 		USDRate = uSDRate;
-		//update();
 	}
 
 	public Double getCNYRate() {
@@ -86,7 +81,6 @@ public class ExchangeRate {
 	}
 	public void setCNYRate(Double cNYRate) {
 		CNYRate = cNYRate;
-		update();
 	}
 
 	public Double getGBPRate() {
@@ -94,7 +88,6 @@ public class ExchangeRate {
 	}
 	public void setGBPRate(Double gBPRate) {
 		GBPRate = gBPRate;
-		update();
 	}
 	
 	public Double getEURRate() {
@@ -102,7 +95,6 @@ public class ExchangeRate {
 	}
 	public void setEURRate(Double eURRate) {
 		EURRate = eURRate;
-		update();
 	}
 	
 	public Double getCADRate() {
@@ -110,18 +102,26 @@ public class ExchangeRate {
 	}
 	public void setCADRate(Double cADRate) {
 		CADRate = cADRate;
-		update();
 	}
 
-	public Timestamp getUpdated() {
+	public Long getUpdated() {
 		return updated;
 	}
-	public void setUpdated(Timestamp updated) {
+	public void setUpdated(Long updated) {
 		this.updated = updated;
+		setDisplayUpdated();
 	}
-	
-	public void update()
+	public void setDisplayUpdated()
 	{
-		this.setUpdated(new Timestamp(date.getTime()));
+		Date date = new Date(this.updated*1000);
+		System.out.println("date: " + date.getTime());
+		this.displayUpdated = date.toString();
+		System.out.println("date str: " + date.toString());
+	}
+	public String getDisplayUpdated() {
+		return displayUpdated;
+	}
+	public void setDisplayUpdated(String displayUpdated) {
+		this.displayUpdated = displayUpdated;
 	}
 }

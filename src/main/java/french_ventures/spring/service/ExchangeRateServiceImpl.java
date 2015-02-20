@@ -18,8 +18,9 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 	public ExchangeRate getExchangeRate(Currency baseCurrency) {
 			RestTemplate restTemplate = new RestTemplate();
 			OpenExchangeRatesJsonModel json  = restTemplate.getForObject("http://openexchangerates.org/api/latest.json?app_id=83e5b4d8f9654732aabe04b0c8dab340", OpenExchangeRatesJsonModel.class);
-			ExchangeRate exchangeRate = new ExchangeRate("USD");
-			
+			ExchangeRate exchangeRate = new ExchangeRate("USD", Long.parseLong(json.getTimestamp()));
+			System.out.println("timestamp: " + json.getTimestamp()); //DEBUG TODO
+			log.debug("timestamp: " + json.getTimestamp());
 			return populateExchangeRate(json, exchangeRate);
 	}
 	

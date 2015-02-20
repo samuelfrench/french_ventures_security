@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class OpenExchangeRatesJsonModel {
 	private String disclaimer;
 	private String license;
-	private Integer timestamp;
+	private String timestamp;
 	private String base;
 	private Map<String,String> rates;
 	
@@ -16,7 +16,7 @@ public class OpenExchangeRatesJsonModel {
 	}
 	
 	public OpenExchangeRatesJsonModel(String disclaimer,
-			String license, Integer timestamp, String base,
+			String license, String timestamp, String base,
 			Map<String,String> rates)
 			{
 		this.disclaimer = disclaimer;
@@ -53,13 +53,13 @@ public class OpenExchangeRatesJsonModel {
 	/**
 	 * @return the timestamp
 	 */
-	public Integer getTimestamp() {
+	public String getTimestamp() {
 		return timestamp;
 	}
 	/**
 	 * @param timestamp the timestamp to set
 	 */
-	public void setTimestamp(Integer timestamp) {
+	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
 	}
 	/**
