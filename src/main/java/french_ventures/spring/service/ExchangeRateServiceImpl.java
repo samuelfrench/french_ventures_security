@@ -19,8 +19,6 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 			RestTemplate restTemplate = new RestTemplate();
 			OpenExchangeRatesJsonModel json  = restTemplate.getForObject("http://openexchangerates.org/api/latest.json?app_id=83e5b4d8f9654732aabe04b0c8dab340", OpenExchangeRatesJsonModel.class);
 			ExchangeRate exchangeRate = new ExchangeRate("USD", Long.parseLong(json.getTimestamp()));
-			System.out.println("timestamp: " + json.getTimestamp()); //DEBUG TODO
-			log.debug("timestamp: " + json.getTimestamp());
 			return populateExchangeRate(json, exchangeRate);
 	}
 	
@@ -29,8 +27,8 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 		//dest.setBaseCurrency(baseCurrency);
 		dest.setUSDRate(webUtility.safeDouble(source.getRates().get("USD")));
 		dest.setCNYRate(webUtility.safeDouble(source.getRates().get("CNY")));
-		//dest.setGBPRate(webUtility.safeDouble(source.getRates().get("GBP")));
-		//dest.setEURRate(webUtility.safeDouble(source.getRates().get("EUR")));
+		dest.setGBPRate(webUtility.safeDouble(source.getRates().get("GBP")));
+		dest.setEURRate(webUtility.safeDouble(source.getRates().get("EUR")));
 		return dest;
 	}
 }
