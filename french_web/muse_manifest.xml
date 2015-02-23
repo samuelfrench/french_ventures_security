@@ -1,0 +1,37 @@
+<manifest alg="2" build="10" opt="true" iceEnabled="true" iceMarkupVersion="2" exportTarget="other" resolutions="1x" timestamp="1424661704795">
+  <folder name="css">
+    <file name="site_global.css" crc="365011649"/>
+    <file name="index.css" crc="479564902" ref="index"/>
+    <file name="master_interior.css" crc="4135090032" ref="index:product:about-us:contact-us"/>
+    <file name="product.css" crc="4120486657" ref="product"/>
+    <file name="about-us.css" crc="4120486657" ref="about-us"/>
+    <file name="contact-us.css" crc="4120486657" ref="contact-us"/>
+  </folder>
+  <folder name="scripts">
+    <file name="jquery-1.8.3.min.js" crc="4164521501" ref="index:about-us:product:contact-us"/>
+    <file name="museutils.js" crc="3777594392" ref="index:about-us:product:contact-us"/>
+    <file name="pie.js" crc="3827607177" ref="index:about-us"/>
+    <file name="jquery.musemenu.js" crc="415733523" ref="index:about-us:product:contact-us"/>
+    <file name="jquery.watch.js" crc="4144919381" ref="index:about-us:product:contact-us"/>
+    <file name="html5shiv.js" crc="4241844378" ref="index:about-us:product:contact-us"/>
+    <file name="webpro.js" crc="474087315" ref="index"/>
+    <file name="musewpslideshow.js" crc="274584885" ref="index"/>
+    <file name="jquery.museoverlay.js" crc="170414611" ref="index"/>
+    <file name="touchswipe.js" crc="100683906" ref="index"/>
+  </folder>
+  <folder name="images">
+    <file name="usa_flag.png" crc="274557444" ref="about-us:product:contact-us:index"/>
+    <file name="chinese_flag.png" crc="59094319" ref="about-us:product:contact-us:index"/>
+    <file name="currency_rate.png" crc="3837110023" ref="about-us:product:contact-us:index"/>
+    <file name="cart.png" crc="368330239" ref="about-us:product:contact-us:index"/>
+    <file name="search.png" crc="292882143" ref="about-us:product:contact-us:index"/>
+    <file name="french_logo.png" crc="3874384866" ref="about-us:product:contact-us:index"/>
+    <file name="road.jpg" crc="4156706841" ref="index"/>
+    <file name="cactus.jpg" crc="6491750" ref="index"/>
+    <file name="trees.jpg" crc="4059350563" ref="index"/>
+  </folder>
+  <file name="index.html" crc="173596373" mt="1424544558044" redirect="true"/>
+  <file name="about-us.html" crc="75376409" mt="1424544508658" redirect="true"/>
+  <file name="product.html" crc="333151515" mt="1424544508659" redirect="true"/>
+  <file name="contact-us.html" crc="3802607196" mt="1424544508661" redirect="true"/>
+</manifest>
