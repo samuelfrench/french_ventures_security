@@ -34,12 +34,12 @@ function createTable(){
 	pTable = $("#customerProductTable").DataTable({
 		"dom":'lpfrtip',
 		"lengthMenu": [[10, 50, 200, 500], [10, 50, 200, 500]],
-		'bAutoResize': true,
-		"bProcessing": true,
-		 "bServerSide": true,
-		 "bFilter": true,
+		'autoResize': true,
+		"processing": true,
+		 "serverSide": true,
+		 "filter": true,
          "paging": true,
-		"bDeferRender": true,
+		"deferRender": true,
 		 'ajax': "/french_ventures_secure/rest/product/customerProductTable",
 
 		columns: [
