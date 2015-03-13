@@ -58,8 +58,9 @@ function createTable(){
 		   },
 		   "rowCallback": function( row, data ) {
 			    // Bold the grade for all 'A' grade browsers
-			   
-			      $('td:eq(7)', row).html( '<b>Buy</b>' );
+			      console.log($('td:eq(1)', row).html()); // <---- seee this
+
+			      $('td:eq(7)', row).html( '<span class="buyLink"><b>Buy</b></span>' );
 			    
 			  }
 	});
