@@ -148,7 +148,7 @@ div.dataTables_length, div.dataTables_filter {
 	display: inline-block;
 }
 #exchangeRate{
-	position: fixed;
+	position: absolute;
 	margin: 20px;
 	display: inline-block;
 	margin-left: 100px;
