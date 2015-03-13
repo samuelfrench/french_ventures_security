@@ -37,6 +37,7 @@
 					<th><h2>Qty Per Unit</h2></th>
 					<th><h2>Units In Stock</h2></th>
 					<th><h2>In Stock</h2></th>
+					<th><h2>Buy</h2><th>
 				</tr>
 			</thead>
 			<tbody>

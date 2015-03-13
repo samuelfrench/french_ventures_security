@@ -50,30 +50,27 @@ function createTable(){
 		           {data: "qtyPerUnit"},
 		           {data: "unitOnHand"},
 		           {data: "inStock"},
-		           
+		           {data: null},
 		       ],
 		       
 		 "initComplete": function(settings, json) {
 		    $('#customerProductTable_length > label').append(" per page");
 		   },
+		   "rowCallback": function( row, data ) {
+			    // Bold the grade for all 'A' grade browsers
+			   
+			      $('td:eq(7)', row).html( '<b>Buy</b>' );
+			    
+			  }
 	});
 	pTable.on( 'preXhr.dt', startLoad);
 	pTable.on('draw.dt', loadComplete);
 	
-	/*
-	 * This is the code to use for row-selection thingy:
-	 * 
-	 https://datatables.net/examples/advanced_init/events_live.html
-	 
- $(document).ready(function() {
-    $('#example').dataTable();
-     
-    $('#example tbody').on('click', 'tr', function () {
-        var name = $('td', this).eq(0).text();
-        alert( 'You clicked on '+name+'\'s row' );
+	$('#customerProductTable tbody').on('click', 'tr', function () {
+        var pCode = $('td', this).eq(1).text();
+        //alert( 'You clicked on '+pCode+'\'s row' );
     } );
-} );
-	 */
+	 
 }
 
 function startLoad()
