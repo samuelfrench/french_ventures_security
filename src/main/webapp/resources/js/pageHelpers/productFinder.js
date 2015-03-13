@@ -58,7 +58,7 @@ function createTable(){
 		   },
 		   "rowCallback": function( row, data ) {
 			    // Bold the grade for all 'A' grade browsers
-			      console.log($('td:eq(1)', row).html()); // <---- seee this
+			      //console.log($('td:eq(1)', row).html()); // <---- seee this
 
 			      $('td:eq(7)', row).html( '<span class="buyLink"><b>Buy</b></span>' );
 			    
@@ -66,12 +66,14 @@ function createTable(){
 	});
 	pTable.on( 'preXhr.dt', startLoad);
 	pTable.on('draw.dt', loadComplete);
-	
+	/*
+	 * May use the following later if it's decided to go with a multiple-select add to cart
+	 
 	$('#customerProductTable tbody').on('click', 'tr', function () {
         var pCode = $('td', this).eq(1).text();
-        //alert( 'You clicked on '+pCode+'\'s row' );
+        alert( 'You clicked on '+pCode+'\'s row' );
     } );
-	 
+	 */
 }
 
 function startLoad()
@@ -94,6 +96,12 @@ function loadComplete()
 		$(this).animate({width: 240, height:180}, 100);
 		$(this).attr('src', '/french_ventures_secure/resources/image/product/thumb/' + $(this).attr('id'));
 	});
+    
+    var buyLinks = $('.buyLink');
+    $.each(buyLinks, function(){
+        var pCode = $(this).closest('tr').find('td').eq(1).text();
+        $(this).attr('id',pCode);
+    });
 }
 
 
