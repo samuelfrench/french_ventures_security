@@ -59,6 +59,21 @@ function createTable(){
 	});
 	pTable.on( 'preXhr.dt', startLoad);
 	pTable.on('draw.dt', loadComplete);
+	
+	/*
+	 * This is the code to use for row-selection thingy:
+	 * 
+	 https://datatables.net/examples/advanced_init/events_live.html
+	 
+ $(document).ready(function() {
+    $('#example').dataTable();
+     
+    $('#example tbody').on('click', 'tr', function () {
+        var name = $('td', this).eq(0).text();
+        alert( 'You clicked on '+name+'\'s row' );
+    } );
+} );
+	 */
 }
 
 function startLoad()
