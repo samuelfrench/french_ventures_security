@@ -24,7 +24,6 @@ $(document).ready(function(){
 	createAddDialog();
 	//updateTable();
 	
-	
 });
 
 /* BEGIN MAIN DATA TABLE FUNCTIONALITY */
@@ -97,10 +96,14 @@ function loadComplete()
 		$(this).attr('src', '/french_ventures_secure/resources/image/product/thumb/' + $(this).attr('id'));
 	});
     
+    //setup buy links
     var buyLinks = $('.buyLink');
     $.each(buyLinks, function(){
         var pCode = $(this).closest('tr').find('td').eq(1).text();
         $(this).attr('id',pCode);
+    });
+    $('.buyLink').click(function(){
+    	alert('id: ' + $(this).attr('id'));
     });
 }
 
